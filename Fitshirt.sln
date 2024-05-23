@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitshirt.Api", "Fitshirt.Api\Fitshirt.Api.csproj", "{F4E9B192-2C86-4102-9B4B-90197FAF5002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitshirt.Domain", "Fitshirt.Domain\Fitshirt.Domain.csproj", "{1C2B05C2-629E-4863-82A1-4E9499DAF4B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{DA3347E8-FA9A-455A-9CA4-92BA49FF8155}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DCED6141-9592-4F91-9CCB-9D0973E064E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A40AB4F3-9B51-48E8-B87F-1BA143EC9FAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitshirt.Infrastructure", "Fitshirt.Infrastructure\Fitshirt.Infrastructure.csproj", "{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4E9B192-2C86-4102-9B4B-90197FAF5002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E9B192-2C86-4102-9B4B-90197FAF5002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E9B192-2C86-4102-9B4B-90197FAF5002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E9B192-2C86-4102-9B4B-90197FAF5002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C2B05C2-629E-4863-82A1-4E9499DAF4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C2B05C2-629E-4863-82A1-4E9499DAF4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C2B05C2-629E-4863-82A1-4E9499DAF4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C2B05C2-629E-4863-82A1-4E9499DAF4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4E9B192-2C86-4102-9B4B-90197FAF5002} = {DCED6141-9592-4F91-9CCB-9D0973E064E6}
+		{1C2B05C2-629E-4863-82A1-4E9499DAF4B1} = {DCED6141-9592-4F91-9CCB-9D0973E064E6}
+		{5BEB24EA-1D3D-4EFB-AFAC-25B7E9D410FA} = {DCED6141-9592-4F91-9CCB-9D0973E064E6}
+	EndGlobalSection
+EndGlobal
