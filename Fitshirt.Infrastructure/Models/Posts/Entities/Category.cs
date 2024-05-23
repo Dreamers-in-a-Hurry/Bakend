@@ -1,7 +1,6 @@
 using Fitshirt.Infrastructure.Models.Common;
-using Fitshirt.Infrastructure.Models.Posts;
 
-namespace Fitshirt.Infrastructure.Models.Purchases.Entities;
+namespace Fitshirt.Infrastructure.Models.Posts.Entities;
 
 public class Category : BaseModel
 {

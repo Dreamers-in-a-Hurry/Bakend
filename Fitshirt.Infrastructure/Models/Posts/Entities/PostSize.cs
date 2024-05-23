@@ -1,4 +1,4 @@
-namespace Fitshirt.Infrastructure.Models.Purchases.Entities;
+namespace Fitshirt.Infrastructure.Models.Posts.Entities;
 
 public class PostSize
 {

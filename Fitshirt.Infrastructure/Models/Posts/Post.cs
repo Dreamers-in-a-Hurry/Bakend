@@ -1,6 +1,6 @@
 using Fitshirt.Infrastructure.Models.Common;
 using Fitshirt.Infrastructure.Models.Common.Entities;
-using Fitshirt.Infrastructure.Models.Purchases.Entities;
+using Fitshirt.Infrastructure.Models.Posts.Entities;
 
 namespace Fitshirt.Infrastructure.Models.Posts;
 
