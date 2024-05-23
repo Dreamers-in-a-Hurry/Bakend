@@ -23,7 +23,6 @@
       <Folder Include="Models\Purchase\ValueObjects\" />
       <Folder Include="Models\User\Entities\" />
       <Folder Include="Models\User\ValueObjects\" />
-      <Folder Include="Repositories\Common\" />
       <Folder Include="Repositories\Designs\" />
       <Folder Include="Repositories\Posts\" />
       <Folder Include="Repositories\Purchases\" />
