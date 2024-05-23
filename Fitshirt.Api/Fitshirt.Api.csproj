@@ -15,4 +15,9 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fitshirt.Domain\Fitshirt.Domain.csproj" />
+      <ProjectReference Include="..\Fitshirt.Infrastructure\Fitshirt.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
