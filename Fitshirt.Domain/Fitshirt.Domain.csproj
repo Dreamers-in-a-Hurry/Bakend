@@ -10,4 +10,11 @@
       <ProjectReference Include="..\Fitshirt.Infrastructure\Fitshirt.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Designs\" />
+      <Folder Include="Features\Posts\" />
+      <Folder Include="Features\Purchases\" />
+      <Folder Include="Features\Users\" />
+    </ItemGroup>
+
 </Project>
