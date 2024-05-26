@@ -10,7 +10,7 @@ public sealed class Design : BaseModel
     public string Name { get; set; }
     public string Image { get; set; }
     
-    public string ShieldId { get; set; }
+    public int ShieldId { get; set; }
     public Shield Shield { get; set; }
     
     public int PrimaryColorId { get; set; }
