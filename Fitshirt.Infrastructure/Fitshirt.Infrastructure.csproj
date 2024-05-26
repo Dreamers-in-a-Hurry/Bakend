@@ -13,20 +13,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\Common\Entities\" />
       <Folder Include="Models\Common\ValueObjects\" />
-      <Folder Include="Models\Design\Entities\" />
-      <Folder Include="Models\Design\ValueObjects\" />
-      <Folder Include="Models\Post\Entities\" />
-      <Folder Include="Models\Post\ValueObjects\" />
-      <Folder Include="Models\Purchase\Entities\" />
-      <Folder Include="Models\Purchase\ValueObjects\" />
-      <Folder Include="Models\User\Entities\" />
-      <Folder Include="Models\User\ValueObjects\" />
-      <Folder Include="Repositories\Designs\" />
-      <Folder Include="Repositories\Posts\" />
-      <Folder Include="Repositories\Purchases\" />
-      <Folder Include="Repositories\Users\" />
+      <Folder Include="Models\Designs\ValueObjects\" />
+      <Folder Include="Models\Posts\ValueObjects\" />
+      <Folder Include="Models\Purchases\ValueObjects\" />
     </ItemGroup>
 
 </Project>
