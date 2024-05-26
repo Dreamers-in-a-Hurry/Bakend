@@ -18,7 +18,7 @@ public sealed class Post : BaseModel
     public int ColorId { get; set; }
     public Color Color { get; set; }
     
-    public ICollection<Size> Sizes { get; set; }
+    public ICollection<PostSize> PostSizes { get; set; }
     
     public int UserId { get; set; }
     public User User { get; set; }

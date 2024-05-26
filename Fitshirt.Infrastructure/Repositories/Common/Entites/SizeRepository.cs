@@ -1,4 +1,4 @@
-using Fitshirt.Infrastructure.Models.Posts.Entities;
+using Fitshirt.Infrastructure.Models.Common.Entities;
 
 namespace Fitshirt.Infrastructure.Repositories.Common.Entites;
 
