@@ -1,6 +1,7 @@
 using Fitshirt.Infrastructure.Models.Common;
 using Fitshirt.Infrastructure.Models.Common.Entities;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
+using Fitshirt.Infrastructure.Models.Users;
 
 namespace Fitshirt.Infrastructure.Models.Posts;
 
@@ -18,4 +19,7 @@ public sealed class Post : BaseModel
     public Color Color { get; set; }
     
     public ICollection<Size> Sizes { get; set; }
+    
+    public int UserId { get; set; }
+    public User User { get; set; }
 }

@@ -7,4 +7,5 @@ public abstract class BaseModel
     public int CreatedBy { get; set; }
     public DateTime ModifiedDate { get; set; }
     public int ModifiedBy { get; set; }
+    public bool IsEnable { get; set; }
 }

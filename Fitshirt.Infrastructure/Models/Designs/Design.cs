@@ -1,6 +1,7 @@
 using Fitshirt.Infrastructure.Models.Common;
 using Fitshirt.Infrastructure.Models.Common.Entities;
 using Fitshirt.Infrastructure.Models.Designs.Entities;
+using Fitshirt.Infrastructure.Models.Users;
 
 namespace Fitshirt.Infrastructure.Models.Designs;
 
@@ -18,4 +19,7 @@ public sealed class Design : BaseModel
     public Color SecondaryColor { get; set; }
     public int TertiaryColorId { get; set; }
     public Color TertiaryColor { get; set; }
+    
+    public int UserId { get; set; }
+    public User User { get; set; }
 }
