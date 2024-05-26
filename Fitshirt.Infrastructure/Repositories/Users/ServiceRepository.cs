@@ -14,7 +14,7 @@ public class ServiceRepository : IServiceRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Service entity)
+    public Task<bool> AddAsync(Service entity)
     {
         throw new NotImplementedException();
     }

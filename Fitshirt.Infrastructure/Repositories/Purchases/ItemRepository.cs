@@ -14,7 +14,7 @@ public class ItemRepository : IItemRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Item entity)
+    public Task<bool> AddAsync(Item entity)
     {
         throw new NotImplementedException();
     }

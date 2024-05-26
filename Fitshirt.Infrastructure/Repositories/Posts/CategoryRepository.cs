@@ -14,7 +14,7 @@ public class CategoryRepository : ICategoryRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Category entity)
+    public Task<bool> AddAsync(Category entity)
     {
         throw new NotImplementedException();
     }

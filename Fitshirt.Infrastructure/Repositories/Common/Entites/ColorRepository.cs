@@ -14,7 +14,7 @@ public class ColorRepository : IColorRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Color entity)
+    public Task<bool> AddAsync(Color entity)
     {
         throw new NotImplementedException();
     }

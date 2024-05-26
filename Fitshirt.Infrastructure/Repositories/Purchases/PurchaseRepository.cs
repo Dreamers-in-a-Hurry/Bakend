@@ -14,7 +14,7 @@ public class PurchaseRepository : IPurchaseRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Purchase entity)
+    public Task<bool> AddAsync(Purchase entity)
     {
         throw new NotImplementedException();
     }

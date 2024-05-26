@@ -14,7 +14,7 @@ public class PostRepository : IPostRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Post entity)
+    public Task<bool> AddAsync(Post entity)
     {
         throw new NotImplementedException();
     }

@@ -14,7 +14,7 @@ public class SizeRepository : ISizeRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Size entity)
+    public Task<bool> AddAsync(Size entity)
     {
         throw new NotImplementedException();
     }

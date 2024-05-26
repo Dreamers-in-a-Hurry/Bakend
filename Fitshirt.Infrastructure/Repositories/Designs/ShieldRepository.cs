@@ -14,7 +14,7 @@ public class ShieldRepository : IShieldRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Shield entity)
+    public Task<bool> AddAsync(Shield entity)
     {
         throw new NotImplementedException();
     }

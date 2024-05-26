@@ -14,7 +14,7 @@ public class DesignRepository : IDesignRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Design entity)
+    public Task<bool> AddAsync(Design entity)
     {
         throw new NotImplementedException();
     }

@@ -14,7 +14,7 @@ public class RoleRepository : IRoleRepository
         throw new NotImplementedException();
     }
 
-    public Task<int> AddAsync(Role entity)
+    public Task<bool> AddAsync(Role entity)
     {
         throw new NotImplementedException();
     }
