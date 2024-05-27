@@ -18,12 +18,12 @@ public sealed class User : BaseModel
     public Address? Address { get; set; }
     
     public int? DebitCardId { get; set; }
-    public DebitCard DebitCard { get; set; }
+    public DebitCard? DebitCard { get; set; }
     
     public int RoleId { get; set; }
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
     public int ServiceId { get; set; }
-    public Service Service { get; set; }
+    public Service? Service { get; set; }
     
     public ICollection<Design> Designs { get; set; }
     public ICollection<Item> Items { get; set; }

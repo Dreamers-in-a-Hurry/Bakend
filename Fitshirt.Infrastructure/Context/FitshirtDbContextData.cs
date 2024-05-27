@@ -1,5 +1,9 @@
 using Fitshirt.Infrastructure.Models.Common.Entities;
+using Fitshirt.Infrastructure.Models.Designs;
+using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
+using Fitshirt.Infrastructure.Models.Purchases.Entities;
+using Fitshirt.Infrastructure.Models.Users;
 using Fitshirt.Infrastructure.Models.Users.Entities;
 using Newtonsoft.Json;
 
@@ -58,6 +62,27 @@ public class FitshirtDbContextData
                 var sizes = JsonConvert.DeserializeObject<List<Size>>(sizesData);
 
                 context.Sizes.AddRange(sizes!);
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.Users.Any())
+            {
+                var user = new User
+                {
+                    Name = "Diego",
+                    Lastname = "Defilippi",
+                    Password = "Password123",
+                    Email = "ddefsan@test.com",
+                    Cellphone = "999999999",
+                    BirthDate = new DateOnly(2002, 10, 2),
+                    RoleId = 1,
+                    ServiceId = 1,
+                    Designs = new List<Design>(),
+                    Items = new List<Item>(),
+                    Posts = new List<Post>()
+                };
+
+                context.Users.Add(user);
                 await context.SaveChangesAsync();
             }
         }
