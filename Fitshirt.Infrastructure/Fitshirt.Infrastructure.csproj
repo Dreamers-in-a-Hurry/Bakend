@@ -6,4 +6,17 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Models\Common\ValueObjects\" />
+      <Folder Include="Models\Designs\ValueObjects\" />
+      <Folder Include="Models\Posts\ValueObjects\" />
+      <Folder Include="Models\Purchases\ValueObjects\" />
+    </ItemGroup>
+
 </Project>
