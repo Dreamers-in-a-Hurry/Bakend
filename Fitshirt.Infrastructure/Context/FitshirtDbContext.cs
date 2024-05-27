@@ -27,6 +27,7 @@ public class FitshirtDbContext : DbContext
                 case EntityState.Added:
                     entry.Entity.CreatedBy = 1;
                     entry.Entity.CreatedDate = DateTime.Now;
+                    entry.Entity.IsEnable = true;
                     break;
                 case EntityState.Modified:
                     entry.Entity.ModifiedBy = 1;
@@ -141,6 +142,8 @@ public class FitshirtDbContext : DbContext
             .HasForeignKey(design => design.UserId)
             .IsRequired(true)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        
     }
     
     public DbSet<User> Users { get; set; }
