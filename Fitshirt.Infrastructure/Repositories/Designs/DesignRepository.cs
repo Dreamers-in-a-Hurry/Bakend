@@ -9,7 +9,7 @@ public class DesignRepository : IDesignRepository
         throw new NotImplementedException();
     }
 
-    public Task<Design> GetByIdAsync(int id)
+    public Task<Design?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class DesignRepository : IDesignRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Design entity)
+    public Task<bool> UpdateAsync(int id, Design entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Design entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

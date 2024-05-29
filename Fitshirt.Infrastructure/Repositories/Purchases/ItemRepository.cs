@@ -9,7 +9,7 @@ public class ItemRepository : IItemRepository
         throw new NotImplementedException();
     }
 
-    public Task<Item> GetByIdAsync(int id)
+    public Task<Item?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class ItemRepository : IItemRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Item entity)
+    public Task<bool> UpdateAsync(int id, Item entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Item entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

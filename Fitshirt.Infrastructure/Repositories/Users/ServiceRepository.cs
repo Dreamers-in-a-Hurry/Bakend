@@ -9,7 +9,7 @@ public class ServiceRepository : IServiceRepository
         throw new NotImplementedException();
     }
 
-    public Task<Service> GetByIdAsync(int id)
+    public Task<Service?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class ServiceRepository : IServiceRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Service entity)
+    public Task<bool> UpdateAsync(int id, Service entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Service entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }
