@@ -1,4 +1,7 @@
 using Fitshirt.Infrastructure.Context;
+using Fitshirt.Infrastructure.Repositories.Common.Entites;
+using Fitshirt.Infrastructure.Repositories.Posts;
+using Fitshirt.Infrastructure.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,18 +18,17 @@ public static class InfrastructureServiceRegistration
         services.AddDbContext<FitshirtDbContext>(options =>
         {
             options.UseMySql(connectionString,
-                ServerVersion.AutoDetect(connectionString),
-                options => options.EnableRetryOnFailure
-                (
-                    maxRetryCount: 5,
-                    maxRetryDelay: TimeSpan.FromSeconds(30),
-                    errorNumbersToAdd: null
-                )
+                ServerVersion.AutoDetect(connectionString)
             );
         });
         
         // Add Repositories
         // services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IColorRepository, ColorRepository>();
+        services.AddScoped<ISizeRepository, SizeRepository>();
         
         return services;
     }
