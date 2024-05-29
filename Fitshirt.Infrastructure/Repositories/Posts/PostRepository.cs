@@ -8,12 +8,10 @@ namespace Fitshirt.Infrastructure.Repositories.Posts;
 public class PostRepository : IPostRepository
 {
     private readonly FitshirtDbContext _context;
-    private ILogger<PostRepository> _logger;
 
     public PostRepository(FitshirtDbContext context, ILogger<PostRepository> logger)
     {
         _context = context;
-        _logger = logger;
     }
 
     public async Task<IReadOnlyList<Post>> GetAllAsync()
@@ -28,6 +26,7 @@ public class PostRepository : IPostRepository
             .Where(post => post.IsEnable && post.Id == id)
             .Include(post => post.Category)
             .Include(post => post.Color)
+            .Include(post => post.User)
             .Include(post => post.PostSizes)
             .ThenInclude(postSize => postSize.Size)
             .FirstOrDefaultAsync();
@@ -109,4 +108,14 @@ public class PostRepository : IPostRepository
             .ToListAsync();
     }
 
+    public async Task<IReadOnlyCollection<Post>> SearchByFiltersAsync (int? categoryId, int? colorId)
+    {
+        return await _context.Posts
+            .Where(post =>
+                (categoryId==null || post.CategoryId == categoryId) &&
+                (colorId==null || post.ColorId == colorId) &&
+                post.IsEnable
+            )
+            .ToListAsync();
+    }
 }
