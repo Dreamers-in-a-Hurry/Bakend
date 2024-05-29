@@ -9,7 +9,7 @@ public class RoleRepository : IRoleRepository
         throw new NotImplementedException();
     }
 
-    public Task<Role> GetByIdAsync(int id)
+    public Task<Role?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class RoleRepository : IRoleRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Role entity)
+    public Task<bool> UpdateAsync(int id, Role entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Role entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

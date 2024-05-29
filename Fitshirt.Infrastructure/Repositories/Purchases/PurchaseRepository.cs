@@ -9,7 +9,7 @@ public class PurchaseRepository : IPurchaseRepository
         throw new NotImplementedException();
     }
 
-    public Task<Purchase> GetByIdAsync(int id)
+    public Task<Purchase?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class PurchaseRepository : IPurchaseRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Purchase entity)
+    public Task<bool> UpdateAsync(int id, Purchase entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Purchase entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

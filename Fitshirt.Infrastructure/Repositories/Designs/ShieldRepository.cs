@@ -9,7 +9,7 @@ public class ShieldRepository : IShieldRepository
         throw new NotImplementedException();
     }
 
-    public Task<Shield> GetByIdAsync(int id)
+    public Task<Shield?> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -19,12 +19,12 @@ public class ShieldRepository : IShieldRepository
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(Shield entity)
+    public Task<bool> UpdateAsync(int id, Shield entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAsync(Shield entity)
+    public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

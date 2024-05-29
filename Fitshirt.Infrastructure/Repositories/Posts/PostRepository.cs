@@ -1,31 +1,112 @@
+using Fitshirt.Infrastructure.Context;
 using Fitshirt.Infrastructure.Models.Posts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Fitshirt.Infrastructure.Repositories.Posts;
 
 public class PostRepository : IPostRepository
 {
-    public Task<IReadOnlyList<Post>> GetAllAsync()
+    private readonly FitshirtDbContext _context;
+    private ILogger<PostRepository> _logger;
+
+    public PostRepository(FitshirtDbContext context, ILogger<PostRepository> logger)
     {
-        throw new NotImplementedException();
+        _context = context;
+        _logger = logger;
     }
 
-    public Task<Post> GetByIdAsync(int id)
+    public async Task<IReadOnlyList<Post>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Posts.Where(post => post.IsEnable)
+            .ToListAsync();
     }
 
-    public Task<bool> AddAsync(Post entity)
+    public async Task<Post?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Posts
+            .Where(post => post.IsEnable && post.Id == id)
+            .Include(post => post.Category)
+            .Include(post => post.Color)
+            .Include(post => post.PostSizes)
+            .ThenInclude(postSize => postSize.Size)
+            .FirstOrDefaultAsync();
     }
 
-    public Task<bool> UpdateAsync(Post entity)
+    public async Task<bool> AddAsync(Post post)
     {
-        throw new NotImplementedException();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            _context.Posts.Add(post);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+        
+        return true;
     }
 
-    public Task<bool> DeleteAsync(Post entity)
+    public async Task<bool> UpdateAsync(int id, Post entity)
     {
-        throw new NotImplementedException();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            var postToUpdate = _context.Posts.FirstOrDefault(post => post.Id == id);
+
+            postToUpdate!.Name = entity.Name;
+            postToUpdate.Image = entity.Image;
+            postToUpdate.Stock = entity.Stock;
+            postToUpdate.Price = entity.Price;
+            postToUpdate.CategoryId = entity.CategoryId;
+            postToUpdate.UserId = entity.UserId;
+            postToUpdate.ColorId = entity.ColorId;
+            postToUpdate.IsEnable = entity.IsEnable;
+            postToUpdate.PostSizes = entity.PostSizes;
+          
+            _context.Posts.Update(postToUpdate);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+
+        return true;
     }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            var postToDelete = _context.Posts.FirstOrDefault(post => post.Id == id);
+
+            if (postToDelete != null) postToDelete.IsEnable = false;
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+
+        return true;
+    }
+
+    public async Task<IReadOnlyCollection<Post>> GetPostsByUserId(int userId)
+    {
+        return await _context.Posts
+            .Where(post => post.UserId == userId && post.IsEnable == true)
+            .ToListAsync();
+    }
+
 }
