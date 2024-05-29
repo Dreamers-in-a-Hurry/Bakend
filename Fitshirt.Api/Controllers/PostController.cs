@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using AutoMapper;
 using Fitshirt.Api.Dtos.Posts;
+using Fitshirt.Api.Dtos.PostsSizes;
 using Fitshirt.Domain.Features.Posts;
 using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Repositories.Posts;
@@ -38,11 +39,13 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostByIdAsync(int id)
     {
         var data = await _postRepository.GetByIdAsync(id);
-        var result = _mapper.Map<Post, PostResponse>(data);
-
-        if (result == null) return NotFound();
+        if (data == null) return NotFound();
         
-        return Ok(result);
+        var sizesResponse = _mapper.Map<List<PostSizeResponse>>(data.PostSizes);
+        var postResponse = _mapper.Map<Post, PostResponse>(data);
+        postResponse.Sizes = sizesResponse;
+        
+        return Ok(postResponse);
     }
 
     [HttpGet]
@@ -51,6 +54,16 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostsByUserIdAsync(int userId)
     {
         var data = await _postRepository.GetPostsByUserId(userId);
+        var result = _mapper.Map<List<ShirtVm>>(data);
+        return Ok(result);
+    }
+    
+    [HttpGet]
+    [Route("filter-shirts")]
+    [Description("Get posts in view mode by filters")]
+    public async Task<IActionResult> GetPostsByFilterAsync(int? categoryId, int? colorId)
+    {
+        var data = await _postRepository.SearchByFiltersAsync(categoryId, colorId);
         var result = _mapper.Map<List<ShirtVm>>(data);
         return Ok(result);
     }

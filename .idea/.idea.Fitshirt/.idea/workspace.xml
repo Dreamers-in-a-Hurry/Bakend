@@ -9,7 +9,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d608233b-d406-4398-bf15-15dc90f28be1" name="Changes" comment="" />
+    <list default="true" id="d608233b-d406-4398-bf15-15dc90f28be1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Fitshirt/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Fitshirt/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Controllers/PostController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Controllers/PostController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Dtos/Posts/PostResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Dtos/Posts/PostResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Dtos/PostsSizes/PostSizeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Dtos/PostsSizes/PostSizeResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Dtos/Sizes/SizeResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Dtos/Sizes/SizeResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/Mapping/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/Mapping/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Infrastructure/Repositories/Posts/IPostRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Infrastructure/Repositories/Posts/IPostRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fitshirt.Infrastructure/Repositories/Posts/PostRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fitshirt.Infrastructure/Repositories/Posts/PostRepository.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +37,21 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Dreamers-in-a-Hurry/Bakend.git",
-    "accountId": "31dba55b-5efc-4526-88dc-48950bab8772"
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "DiegoDefSan"
   }
 }]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dreamers-in-a-Hurry/Bakend.git&quot;,
+    &quot;accountId&quot;: &quot;31dba55b-5efc-4526-88dc-48950bab8772&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://D:/UPC/Ciclo VI/Aplicaciones Web/tests/Backend/Bakend/Fitshirt.Api/Controllers/PostController.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -45,8 +65,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.Fitshirt.Api: http.executor": "Run",
+    ".NET Launch Settings Profile.Fitshirt.Api: https.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "feature/post-implementation",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -62,7 +83,22 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Fitshirt.Api: http">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Fitshirt.Api: https">
+    <configuration name="Fitshirt.Api: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="Fitshirt.Api: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -82,6 +118,36 @@
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
       <option name="LAUNCH_PROFILE_NAME" value="http" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Fitshirt.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="http" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Fitshirt.Api: https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Fitshirt.Api/Fitshirt.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="https" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -129,5 +195,6 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

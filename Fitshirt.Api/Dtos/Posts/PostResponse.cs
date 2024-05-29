@@ -1,6 +1,7 @@
 using Fitshirt.Api.Dtos.Categories;
 using Fitshirt.Api.Dtos.Colors;
 using Fitshirt.Api.Dtos.PostsSizes;
+using Fitshirt.Api.Dtos.Users;
 
 namespace Fitshirt.Api.Dtos.Posts;
 
@@ -13,6 +14,6 @@ public class PostResponse
     public double Price { get; set; }
     public CategoryResponse Category { get; set; }
     public ColorResponse Color { get; set; }
-    public int UserId { get; set; }
+    public UserResponse User { get; set; }
     public List<PostSizeResponse> Sizes { get; set; }
 }

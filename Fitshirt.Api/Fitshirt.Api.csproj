@@ -21,8 +21,4 @@
       <ProjectReference Include="..\Fitshirt.Infrastructure\Fitshirt.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Dtos\Users\" />
-    </ItemGroup>
-
 </Project>
