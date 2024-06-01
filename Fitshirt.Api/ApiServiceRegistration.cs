@@ -1,4 +1,5 @@
 using System.Reflection;
+using Fitshirt.Api.Errors;
 
 namespace Fitshirt.Api;
 

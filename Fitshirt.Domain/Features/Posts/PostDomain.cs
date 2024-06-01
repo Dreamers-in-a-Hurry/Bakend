@@ -42,7 +42,7 @@ public class PostDomain : IPostDomain
 
         if (existingPost == null)
         {
-            throw new NotFoundException(nameof(Post), id);
+            throw new NotFoundEntityIdException(nameof(Post), id);
         }
 
         return await _postRepository.DeleteAsync(id);
@@ -54,28 +54,33 @@ public class PostDomain : IPostDomain
 
         if (user == null)
         {
-            throw new NotFoundException(nameof(User), post.UserId);
+            throw new NotFoundEntityIdException(nameof(User), post.UserId);
         }
 
         var category = await _categoryRepository.GetByIdAsync(post.CategoryId);
 
         if (category == null)
         {
-            throw new NotFoundException(nameof(Category), post.CategoryId);
+            throw new NotFoundEntityIdException(nameof(Category), post.CategoryId);
         }
 
         var color = await _colorRepository.GetByIdAsync(post.ColorId);
 
         if (color == null)
         {
-            throw new NotFoundException(nameof(Color), post.ColorId);
+            throw new NotFoundEntityIdException(nameof(Color), post.ColorId);
         }
 
         var sizes = await _sizeRepository.GetSizesByIdsAsync(sizeIds);
-
+        
         if (sizes.Count != sizeIds.Count)
         {
-            throw new AnyNotFoundException(nameof(Size));
+            // Author: Diego
+            // If any size requested is not found, compare with sizes in database and show ones which are not in.
+            var sizesIdFoundInDatabase = sizes.Select(s => s.Id).ToList();
+            var sizesNotFoundInDatabase = sizeIds.Except(sizesIdFoundInDatabase).ToList();
+
+            throw new NotFoundInListException<int>(nameof(Size), nameof(Size.Id), sizesNotFoundInDatabase);
         }
 
         post.PostSizes = sizes.Select(s => new PostSize
@@ -92,35 +97,38 @@ public class PostDomain : IPostDomain
 
         if (existingPost == null)
         {
-            throw new NotFoundException(nameof(Post), id);
+            throw new NotFoundEntityIdException(nameof(Post), id);
         }
         
         var user = await _userRepository.GetByIdAsync(post.UserId);
 
         if (user == null)
         {
-            throw new NotFoundException(nameof(User), post.UserId);
+            throw new NotFoundEntityIdException(nameof(User), post.UserId);
         }
 
         var category = await _categoryRepository.GetByIdAsync(post.CategoryId);
 
         if (category == null)
         {
-            throw new NotFoundException(nameof(Category), post.CategoryId);
+            throw new NotFoundEntityIdException(nameof(Category), post.CategoryId);
         }
         
         var color = await _colorRepository.GetByIdAsync(post.ColorId);
 
         if (color == null)
         {
-            throw new NotFoundException(nameof(Color), post.ColorId);
+            throw new NotFoundEntityIdException(nameof(Color), post.ColorId);
         }
         
         var sizes = await _sizeRepository.GetSizesByIdsAsync(sizeIds);
-
+        
         if (sizes.Count != sizeIds.Count)
         {
-            throw new AnyNotFoundException(nameof(List<Size>));
+            var sizesIdFoundInDatabase = sizes.Select(s => s.Id).ToList();
+            var sizesNotFoundInDatabase = sizeIds.Except(sizesIdFoundInDatabase).ToList();
+
+            throw new NotFoundInListException<int>(nameof(Size), nameof(Size.Id), sizesNotFoundInDatabase);
         }
 
         post.PostSizes = sizes.Select(s => new PostSize
