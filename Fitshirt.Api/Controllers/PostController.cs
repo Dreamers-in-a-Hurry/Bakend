@@ -2,6 +2,7 @@ using System.ComponentModel;
 using AutoMapper;
 using Fitshirt.Api.Dtos.Posts;
 using Fitshirt.Api.Dtos.PostsSizes;
+using Fitshirt.Domain.Exceptions;
 using Fitshirt.Domain.Features.Posts;
 using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Repositories.Posts;
@@ -39,13 +40,14 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostByIdAsync(int id)
     {
         var data = await _postRepository.GetByIdAsync(id);
-        if (data == null) return NotFound();
-        
+        if (data == null) throw new NotFoundEntityIdException(nameof(Post) , id);
+
         var sizesResponse = _mapper.Map<List<PostSizeResponse>>(data.PostSizes);
         var postResponse = _mapper.Map<Post, PostResponse>(data);
         postResponse.Sizes = sizesResponse;
-        
+
         return Ok(postResponse);
+        
     }
 
     [HttpGet]
@@ -71,43 +73,23 @@ public class PostController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostPostAsync([FromBody] PostRequest request)
     {
-        try
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            
-            var post = _mapper.Map<PostRequest, Post>(request);
-            var result = await _postDomain.AddPostAsync(post, request.SizeIds);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var post = _mapper.Map<PostRequest, Post>(request);
+        var result = await _postDomain.AddPostAsync(post, request.SizeIds);
+        return Ok(result);
     }
 
     [HttpPut]
     public async Task<IActionResult> PutPostAsync(int id, [FromBody] PostRequest request)
     {
-        try
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            var post = _mapper.Map<PostRequest, Post>(request);
-
-            var result = await _postDomain.UpdatePostAsync(id, post, request.SizeIds);
-
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var post = _mapper.Map<PostRequest, Post>(request);
+        var result = await _postDomain.UpdatePostAsync(id, post, request.SizeIds);
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePostAsync(int id)
     {
         var result = await _postDomain.DeleteAsync(id);
-
         return Ok(result);
     }
     

@@ -1,4 +1,5 @@
 using Fitshirt.Api;
+using Fitshirt.Api.Extensions.Middlewares;
 using Fitshirt.Domain;
 using Fitshirt.Infrastructure;
 using Fitshirt.Infrastructure.Context;
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
