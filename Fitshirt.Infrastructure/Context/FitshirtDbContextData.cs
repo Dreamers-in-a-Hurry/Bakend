@@ -71,6 +71,7 @@ public class FitshirtDbContextData
                 {
                     Name = "Diego",
                     Lastname = "Defilippi",
+                    Username = "Diego_DefSan",
                     Password = "Password123",
                     Email = "ddefsan@test.com",
                     Cellphone = "999999999",

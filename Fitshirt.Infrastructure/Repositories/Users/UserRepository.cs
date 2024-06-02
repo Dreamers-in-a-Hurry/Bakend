@@ -13,9 +13,9 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public Task<IReadOnlyList<User>> GetAllAsync()
+    public async Task<IReadOnlyList<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Users.Where(user => user.IsEnable).ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(int id)
@@ -23,9 +23,22 @@ public class UserRepository : IUserRepository
         return await _context.Users.Where(user => user.IsEnable && user.Id == id).FirstOrDefaultAsync();
     }
 
-    public Task<bool> AddAsync(User entity)
+    public async Task<bool> AddAsync(User entity)
     {
-        throw new NotImplementedException();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            _context.Users.Add(entity);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+
+        return true;
     }
 
     public Task<bool> UpdateAsync(int id, User entity)
@@ -36,5 +49,20 @@ public class UserRepository : IUserRepository
     public Task<bool> DeleteAsync(int id)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<User?> GetUserByEmailAsync(string email)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.IsEnable && u.Email == email);
+    }
+
+    public async Task<User?> GetUserByPhoneNumberAsync(string phoneNumber)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.IsEnable && u.Cellphone == phoneNumber);
+    }
+
+    public async Task<User?> GetUserByUsernameAsync(string username)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.IsEnable && u.Username == username);
     }
 }
