@@ -5,5 +5,4 @@ namespace Fitshirt.Infrastructure.Repositories.Designs;
 
 public interface IShieldRepository : IBaseRepository<Shield>
 {
-    
 }

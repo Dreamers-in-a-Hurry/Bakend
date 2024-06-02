@@ -1,17 +1,26 @@
+using Fitshirt.Infrastructure.Context;
 using Fitshirt.Infrastructure.Models.Designs.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fitshirt.Infrastructure.Repositories.Designs;
 
 public class ShieldRepository : IShieldRepository
 {
+    private readonly FitshirtDbContext _context;
+
+    public ShieldRepository(FitshirtDbContext context)
+    {
+        _context = context;
+    }
     public Task<IReadOnlyList<Shield>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Shield?> GetByIdAsync(int id)
+    public async Task<Shield?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Shields.Where(shield => shield.IsEnable && shield.Id == id)
+            .FirstOrDefaultAsync();
     }
 
     public Task<bool> AddAsync(Shield entity)
