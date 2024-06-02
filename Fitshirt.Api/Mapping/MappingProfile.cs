@@ -29,6 +29,8 @@ public class MappingProfile : Profile
         CreateMap<Color, ColorResponse>();
         
         CreateMap<User, UserResponse>();
+        CreateMap<UserLoginRequest, User>();
+        CreateMap<UserRegisterRequest, User>();
     }
     
 }
