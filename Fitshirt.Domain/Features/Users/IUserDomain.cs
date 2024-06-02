@@ -5,5 +5,5 @@ namespace Fitshirt.Domain.Features.Users;
 
 public interface IUserDomain : IBaseDomain<User>
 {
-    
+    Task<User> VerifyLoginRequestAsync(User user);
 }

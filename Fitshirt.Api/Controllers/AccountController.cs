@@ -36,4 +36,17 @@ public class AccountController : ControllerBase
         
         return Ok(result);
     }
+
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
+    {
+        var userLogin = _mapper.Map<UserLoginRequest, User>(request);
+
+        var userLogged = await _userDomain.VerifyLoginRequestAsync(userLogin);
+
+        var userResponse = _mapper.Map<User, UserResponse>(userLogged);
+
+        return Ok(userResponse);
+    }
 }

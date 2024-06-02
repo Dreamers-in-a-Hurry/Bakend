@@ -1,4 +1,3 @@
-using AutoMapper;
 using Fitshirt.Domain.Exceptions;
 using Fitshirt.Infrastructure.Models.Users;
 using Fitshirt.Infrastructure.Repositories.Users;
@@ -84,6 +83,22 @@ public class UserDomain : IUserDomain
     public async Task<bool> DeleteAsync(int id)
     {
         return await _userRepository.DeleteAsync(id);
+    }
+
+    public async Task<User> VerifyLoginRequestAsync(User userLoginRequest)
+    {
+        var userInDatabase = await _userRepository.GetUserByUsernameAsync(userLoginRequest.Username);
+        if (userInDatabase == null)
+        {
+            throw new NotFoundEntityAttributeException(nameof(User), nameof(userLoginRequest.Username), userLoginRequest.Username);
+        }
+        
+        if (userLoginRequest.Password != userInDatabase.Password)
+        {
+            throw new ValidationException("Incorrect password");
+        }
+
+        return userInDatabase;
     }
 
     private bool IsAgeLowerThan18(DateOnly birthDate)
