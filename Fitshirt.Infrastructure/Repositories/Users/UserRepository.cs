@@ -41,9 +41,22 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public Task<bool> UpdateAsync(int id, User entity)
+    public async Task<bool> UpdateAsync(int id, User entity)
     {
-        throw new NotImplementedException();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            _context.Users.Update(entity);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+            
+            return true;
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public Task<bool> DeleteAsync(int id)
