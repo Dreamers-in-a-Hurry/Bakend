@@ -31,6 +31,8 @@ public class UserRepository : IUserRepository
             _context.Users.Add(entity);
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+            
+            return true;
         }
         catch (Exception e)
         {
@@ -38,7 +40,6 @@ public class UserRepository : IUserRepository
             throw;
         }
 
-        return true;
     }
 
     public async Task<bool> UpdateAsync(int id, User entity)
@@ -59,9 +60,25 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            var userToDelete = _context.Users.FirstOrDefault(user => user.Id == id);
+
+            userToDelete!.IsEnable = false;
+            _context.Users.Update(userToDelete);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task<User?> GetUserByEmailAsync(string email)

@@ -46,4 +46,18 @@ public class UserController : ControllerBase
         var result = await _userDomain.UpdateAsync(id, userToUpdate);
         return Ok(result);
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteUserAsync(int id)
+    {
+        var userToDelete = await _userRepository.GetByIdAsync(id);
+        
+        if (userToDelete == null)
+        {
+            throw new NotFoundEntityIdException(nameof(User), id);
+        }
+
+        var result = await _userDomain.DeleteAsync(id);
+        return Ok(result);
+    }
 }

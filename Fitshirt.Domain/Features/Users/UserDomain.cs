@@ -10,7 +10,6 @@ public class UserDomain : IUserDomain
     private readonly IUserRepository _userRepository;
     private readonly IServiceRepository _serviceRepository;
     private readonly IRoleRepository _roleRepository;
-    private readonly IMapper _mapper;
 
     public UserDomain(IUserRepository userRepository, IServiceRepository serviceRepository, IRoleRepository roleRepository)
     {
@@ -82,9 +81,9 @@ public class UserDomain : IUserDomain
         return await _userRepository.UpdateAsync(id, user);
     }
 
-    public Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _userRepository.DeleteAsync(id);
     }
 
     private bool IsAgeLowerThan18(DateOnly birthDate)
