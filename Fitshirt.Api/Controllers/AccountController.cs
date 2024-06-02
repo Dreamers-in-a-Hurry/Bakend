@@ -23,6 +23,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost]
+    [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
     {
         if (!ModelState.IsValid)
