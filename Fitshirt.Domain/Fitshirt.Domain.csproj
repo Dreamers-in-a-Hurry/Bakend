@@ -13,7 +13,20 @@
     <ItemGroup>
       <Folder Include="Features\Designs\" />
       <Folder Include="Features\Purchases\" />
-      <Folder Include="Features\Users\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Features\Users\**" />
+      <Compile Include="Features\Users\IUserDomain.cs" />
+      <Compile Include="Features\Users\UserDomain.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Features\Users\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Features\Users\**" />
     </ItemGroup>
 
 </Project>
