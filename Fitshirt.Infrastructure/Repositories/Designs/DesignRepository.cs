@@ -27,8 +27,8 @@ public class DesignRepository : IDesignRepository
             .Include(design => design.PrimaryColor)
             .Include(design => design.SecondaryColor)
             .Include(design => design.TertiaryColor)
-            .Include(design => design.Shield)
-            .ThenInclude(shield => shield.NameTeam)
+            .Include(design => design.DesignShield)
+            .ThenInclude(designShield => designShield.Designs)
             .FirstOrDefaultAsync();
     }
 

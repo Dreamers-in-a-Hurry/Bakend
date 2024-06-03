@@ -129,7 +129,7 @@ public class FitshirtDbContext : DbContext
         // ------
 
         builder.Entity<Design>()
-            .HasOne(design => design.Shield)
+            .HasOne(design => design.DesignShield)
             .WithMany(shield => shield.Designs)
             .HasForeignKey(design => design.ShieldId)
             .IsRequired(true)
@@ -157,7 +157,7 @@ public class FitshirtDbContext : DbContext
     public DbSet<PostSize> PostSizes { get; set; }
     
     public DbSet<Design> Designs { get; set; }
-    public DbSet<Shield> Shields { get; set; }
+    public DbSet<DesignShield> Shields { get; set; }
     
     public DbSet<Color> Colors { get; set; }
     public DbSet<Size> Sizes { get; set; }

@@ -11,7 +11,7 @@ public sealed class Design : BaseModel
     public string Image { get; set; }
     
     public int ShieldId { get; set; }
-    public Shield Shield { get; set; }
+    public DesignShield DesignShield { get; set; }
     
     public int PrimaryColorId { get; set; }
     public Color PrimaryColor { get; set; }
@@ -19,6 +19,8 @@ public sealed class Design : BaseModel
     public Color SecondaryColor { get; set; }
     public int TertiaryColorId { get; set; }
     public Color TertiaryColor { get; set; }
+    
+    public ICollection<DesignShield> DesignShields { get; set; }
     
     public int UserId { get; set; }
     public User User { get; set; }

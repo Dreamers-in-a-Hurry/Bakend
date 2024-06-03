@@ -10,9 +10,21 @@ public class DesignRequest
     
     [Required(ErrorMessage = "This field is required")]
     [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
-    public int ColorId { get; set; }
+    public int ColorPrimaryId { get; set; }
+    
+    [Required(ErrorMessage = "This field is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
+    public int ColorSecondaryId { get; set; }
+    
+    [Required(ErrorMessage = "This field is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
+    public int ColorTertiaryId { get; set; }
     
     [Required(ErrorMessage = "This field is required")]
     [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
     public int UserId { get; set; }
+    
+    [Required]
+    
+    public List<int> ShieldId { get; set; }
 }

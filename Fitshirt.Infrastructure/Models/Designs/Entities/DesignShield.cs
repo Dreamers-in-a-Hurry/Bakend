@@ -2,7 +2,7 @@ using Fitshirt.Infrastructure.Models.Common;
 
 namespace Fitshirt.Infrastructure.Models.Designs.Entities;
 
-public class Shield : BaseModel
+public class DesignShield : BaseModel
 {
     public string NameTeam { get; set; }
     

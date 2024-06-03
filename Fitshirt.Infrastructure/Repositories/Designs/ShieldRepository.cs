@@ -12,23 +12,23 @@ public class ShieldRepository : IShieldRepository
     {
         _context = context;
     }
-    public Task<IReadOnlyList<Shield>> GetAllAsync()
+    public Task<IReadOnlyList<DesignShield>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Shield?> GetByIdAsync(int id)
+    public async Task<DesignShield?> GetByIdAsync(int id)
     {
         return await _context.Shields.Where(shield => shield.IsEnable && shield.Id == id)
             .FirstOrDefaultAsync();
     }
 
-    public Task<bool> AddAsync(Shield entity)
+    public Task<bool> AddAsync(DesignShield entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> UpdateAsync(int id, Shield entity)
+    public Task<bool> UpdateAsync(int id, DesignShield entity)
     {
         throw new NotImplementedException();
     }
