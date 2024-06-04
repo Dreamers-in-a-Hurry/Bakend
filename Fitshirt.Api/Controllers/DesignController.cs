@@ -44,7 +44,7 @@ public class DesignController: ControllerBase
         var data = await _designRepository.GetByIdAsync(id);
         if (data == null) return NotFound();
         
-        var shieldResponse = _mapper.Map<List<DesignShieldResponse>>(data.DesignShields);
+        var shieldResponse = _mapper.Map<List<DesignShieldResponse>>(data.DesignShield);
         var designResponse = _mapper.Map<Design,DesignResponse>(data);
         designResponse.NameTeam = shieldResponse;
         

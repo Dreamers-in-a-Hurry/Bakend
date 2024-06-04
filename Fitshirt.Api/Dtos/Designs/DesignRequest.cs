@@ -24,7 +24,7 @@ public class DesignRequest
     [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
     public int UserId { get; set; }
     
-    [Required]
-    
-    public List<int> ShieldId { get; set; }
+    [Required(ErrorMessage = "This field is required")]
+    [Range(1, int.MaxValue, ErrorMessage = "The number field must be a positive integer")]
+    public int ShieldId { get; set; }
 }

@@ -20,8 +20,6 @@ public sealed class Design : BaseModel
     public int TertiaryColorId { get; set; }
     public Color TertiaryColor { get; set; }
     
-    public ICollection<DesignShield> DesignShields { get; set; }
-    
     public int UserId { get; set; }
     public User User { get; set; }
 }
