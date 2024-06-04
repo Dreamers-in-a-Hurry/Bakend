@@ -1,5 +1,6 @@
 using Fitshirt.Infrastructure.Context;
 using Fitshirt.Infrastructure.Repositories.Common.Entites;
+using Fitshirt.Infrastructure.Repositories.Designs;
 using Fitshirt.Infrastructure.Repositories.Posts;
 using Fitshirt.Infrastructure.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ public static class InfrastructureServiceRegistration
         // Add Repositories
         // services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<IDesignRepository, DesignRepository>();
+        services.AddScoped<IShieldRepository, ShieldRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IColorRepository, ColorRepository>();

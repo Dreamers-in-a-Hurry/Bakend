@@ -129,6 +129,27 @@ public class FitshirtDbContext : DbContext
         // ------
 
         builder.Entity<Design>()
+            .HasOne(design => design.PrimaryColor)
+            .WithMany(color => color.DesignsPrimaryColor)
+            .HasForeignKey(design => design.PrimaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.Entity<Design>()
+            .HasOne(design => design.SecondaryColor)
+            .WithMany(color => color.DesignsSecondaryColor)
+            .HasForeignKey(design => design.SecondaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.Entity<Design>()
+            .HasOne(design => design.TertiaryColor)
+            .WithMany(color => color.DesignsTertiaryColor)
+            .HasForeignKey(design => design.TertiaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Design>()
             .HasOne(design => design.Shield)
             .WithMany(shield => shield.Designs)
             .HasForeignKey(design => design.ShieldId)

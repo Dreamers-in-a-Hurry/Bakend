@@ -8,7 +8,7 @@ namespace Fitshirt.Infrastructure.Models.Designs;
 public sealed class Design : BaseModel
 {
     public string Name { get; set; }
-    public string Image { get; set; }
+    public string? Image { get; set; }
     
     public int ShieldId { get; set; }
     public Shield Shield { get; set; }

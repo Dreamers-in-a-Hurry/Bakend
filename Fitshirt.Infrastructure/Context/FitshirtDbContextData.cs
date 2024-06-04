@@ -1,5 +1,6 @@
 using Fitshirt.Infrastructure.Models.Common.Entities;
 using Fitshirt.Infrastructure.Models.Designs;
+using Fitshirt.Infrastructure.Models.Designs.Entities;
 using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
 using Fitshirt.Infrastructure.Models.Purchases.Entities;
@@ -62,6 +63,16 @@ public class FitshirtDbContextData
                 var sizes = JsonConvert.DeserializeObject<List<Size>>(sizesData);
 
                 context.Sizes.AddRange(sizes!);
+                await context.SaveChangesAsync();
+            }
+
+            if (!context.Shields.Any())
+            {
+                var shieldData = await File.ReadAllTextAsync("../Fitshirt.Infrastructure/Data/shields.json");
+
+                var shields = JsonConvert.DeserializeObject<List < Shield >> (shieldData);
+                
+                context.Shields.AddRange(shields!);
                 await context.SaveChangesAsync();
             }
 
