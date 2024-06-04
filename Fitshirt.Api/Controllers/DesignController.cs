@@ -44,9 +44,7 @@ public class DesignController: ControllerBase
         var data = await _designRepository.GetByIdAsync(id);
         if (data == null) return NotFound();
         
-        var shieldResponse = _mapper.Map<List<DesignShieldResponse>>(data.DesignShield);
         var designResponse = _mapper.Map<Design,DesignResponse>(data);
-        designResponse.NameTeam = shieldResponse;
         
         return Ok(designResponse);
     }
@@ -69,7 +67,7 @@ public class DesignController: ControllerBase
             if (!ModelState.IsValid) return BadRequest();
             
             var design = _mapper.Map<DesignRequest, Design>(request);
-            var result = await _designDomain.AddDesignAsync(design, request.ShieldId);
+            var result = await _designDomain.AddDesignAsync(design);
             return Ok(result);
         }
         catch (Exception ex)
@@ -86,7 +84,7 @@ public class DesignController: ControllerBase
             if (!ModelState.IsValid) return BadRequest();
             var design = _mapper.Map<DesignRequest, Design>(request);
 
-            var result = await _designDomain.UpdateDesignAsync(id, design, request.ShieldId);
+            var result = await _designDomain.UpdateDesignAsync(id, design);
 
             return Ok(result);
         }

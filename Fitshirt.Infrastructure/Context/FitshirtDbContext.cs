@@ -129,7 +129,28 @@ public class FitshirtDbContext : DbContext
         // ------
 
         builder.Entity<Design>()
-            .HasOne(design => design.DesignShield)
+            .HasOne(design => design.PrimaryColor)
+            .WithMany(color => color.DesignsPrimaryColor)
+            .HasForeignKey(design => design.PrimaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.Entity<Design>()
+            .HasOne(design => design.SecondaryColor)
+            .WithMany(color => color.DesignsSecondaryColor)
+            .HasForeignKey(design => design.SecondaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.Entity<Design>()
+            .HasOne(design => design.TertiaryColor)
+            .WithMany(color => color.DesignsTertiaryColor)
+            .HasForeignKey(design => design.TertiaryColorId)
+            .IsRequired(true)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Entity<Design>()
+            .HasOne(design => design.Shield)
             .WithMany(shield => shield.Designs)
             .HasForeignKey(design => design.ShieldId)
             .IsRequired(true)
@@ -157,7 +178,7 @@ public class FitshirtDbContext : DbContext
     public DbSet<PostSize> PostSizes { get; set; }
     
     public DbSet<Design> Designs { get; set; }
-    public DbSet<DesignShield> Shields { get; set; }
+    public DbSet<Shield> Shields { get; set; }
     
     public DbSet<Color> Colors { get; set; }
     public DbSet<Size> Sizes { get; set; }

@@ -24,11 +24,11 @@ public class DesignRepository : IDesignRepository
     {
         return await _context.Designs
             .Where(design => design.IsEnable && design.Id == id)
+            .Include(design => design.User )
             .Include(design => design.PrimaryColor)
             .Include(design => design.SecondaryColor)
             .Include(design => design.TertiaryColor)
-            .Include(design => design.DesignShield)
-            .ThenInclude(designShield => designShield.Designs)
+            .Include(design => design.Shield)
             .FirstOrDefaultAsync();
     }
 

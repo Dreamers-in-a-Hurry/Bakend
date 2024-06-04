@@ -4,6 +4,6 @@ using Fitshirt.Infrastructure.Repositories.Common;
 
 namespace Fitshirt.Infrastructure.Repositories.Designs;
 
-public interface IShieldRepository : IBaseRepository<DesignShield>
+public interface IShieldRepository : IBaseRepository<Shield>
 {
 }

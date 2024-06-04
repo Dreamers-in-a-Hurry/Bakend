@@ -45,7 +45,7 @@ public class DesignDomain : IDesignDomain
         return await _designRepository.DeleteAsync(id);
     }
 
-    public async Task<bool> AddDesignAsync(Design design, ICollection<int> shieldId)
+    public async Task<bool> AddDesignAsync(Design design)
     {
         var user = await _userRepository.GetByIdAsync(design.UserId);
 
@@ -57,7 +57,7 @@ public class DesignDomain : IDesignDomain
         var shield = await _shieldRepository.GetByIdAsync(design.ShieldId);
         if (shield == null)
         {
-            throw new NotFoundEntityIdException(nameof(DesignShield), design.ShieldId);
+            throw new NotFoundEntityIdException(nameof(Shield), design.ShieldId);
         }
 
         return await _designRepository.AddAsync(design);
@@ -103,7 +103,7 @@ public class DesignDomain : IDesignDomain
         var shield = await _shieldRepository.GetByIdAsync(design.ShieldId);
         if (shield == null)
         {
-            throw new NotFoundEntityIdException(nameof(DesignShield), design.ShieldId);
+            throw new NotFoundEntityIdException(nameof(Shield), design.ShieldId);
         }
 
         return await _designRepository.UpdateAsync(id, design);
