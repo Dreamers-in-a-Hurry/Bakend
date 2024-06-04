@@ -11,6 +11,7 @@ public sealed class User : BaseModel
 {
     public string Name { get; set; }
     public string Lastname { get; set; }
+    public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
     public string Cellphone { get; set; }
@@ -24,8 +25,8 @@ public sealed class User : BaseModel
     public Role? Role { get; set; }
     public int ServiceId { get; set; }
     public Service? Service { get; set; }
-    
-    public ICollection<Design> Designs { get; set; }
-    public ICollection<Item> Items { get; set; }
-    public ICollection<Post> Posts { get; set; }
+
+    public ICollection<Design> Designs { get; set; } = new List<Design>();
+    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public ICollection<Post> Posts { get; set; } = new List<Post>();
 }

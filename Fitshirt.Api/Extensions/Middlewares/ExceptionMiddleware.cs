@@ -45,6 +45,9 @@ public class ExceptionMiddleware
             case NotFoundInListException<int>:
                 statusCode = (int)HttpStatusCode.NotFound;
                 break;
+            case ValidationException:
+                statusCode = (int)HttpStatusCode.BadRequest;
+                break;
             default:
                 break;
         }
