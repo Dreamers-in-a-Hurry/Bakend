@@ -53,6 +53,27 @@ public class DesignDomain : IDesignDomain
         {
             throw new NotFoundEntityIdException(nameof(User), design.UserId);
         }
+        
+        var colorPrimary = await _colorRepository.GetByIdAsync(design.PrimaryColorId);
+
+        if (colorPrimary == null)
+        {
+            throw new NotFoundEntityIdException(nameof(Color), design.PrimaryColorId);
+        }
+        
+        var colorSecondary = await _colorRepository.GetByIdAsync(design.SecondaryColorId);
+
+        if (colorSecondary == null)
+        {
+            throw new NotFoundEntityIdException(nameof(Color), design.SecondaryColorId);
+        }
+        
+        var colorTertiary = await _colorRepository.GetByIdAsync(design.TertiaryColorId);
+
+        if (colorTertiary == null)
+        {
+            throw new NotFoundEntityIdException(nameof(Color), design.TertiaryColorId);
+        }
 
         var shield = await _shieldRepository.GetByIdAsync(design.ShieldId);
         if (shield == null)

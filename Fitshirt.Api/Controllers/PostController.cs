@@ -2,6 +2,7 @@ using System.ComponentModel;
 using AutoMapper;
 using Fitshirt.Api.Dtos.Posts;
 using Fitshirt.Api.Dtos.PostsSizes;
+using Fitshirt.Api.Errors;
 using Fitshirt.Domain.Exceptions;
 using Fitshirt.Domain.Features.Posts;
 using Fitshirt.Infrastructure.Models.Posts;
@@ -30,6 +31,15 @@ public class PostController : ControllerBase
     public async Task<ActionResult> GetPostsAsync()
     {
         var data = await _postRepository.GetAllAsync();
+
+        if (data.Count == 0)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NoEntitiesFoundException(nameof(Post)));
+
+            return NotFound(errorResponse);
+        }
+        
         var result = _mapper.Map<List<ShirtVm>>(data);
         
         return Ok(result);
@@ -40,7 +50,13 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostByIdAsync(int id)
     {
         var data = await _postRepository.GetByIdAsync(id);
-        if (data == null) throw new NotFoundEntityIdException(nameof(Post) , id);
+        if (data == null)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NotFoundEntityIdException(nameof(Post), id));
+
+            return NotFound(errorResponse);
+        }
 
         var sizesResponse = _mapper.Map<List<PostSizeResponse>>(data.PostSizes);
         var postResponse = _mapper.Map<Post, PostResponse>(data);
@@ -56,6 +72,15 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostsByUserIdAsync(int userId)
     {
         var data = await _postRepository.GetPostsByUserId(userId);
+
+        if (data.Count == 0)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NotFoundEntityIdException(nameof(User), userId));
+
+            return NotFound(errorResponse);
+        }
+        
         var result = _mapper.Map<List<ShirtVm>>(data);
         return Ok(result);
     }
@@ -66,6 +91,15 @@ public class PostController : ControllerBase
     public async Task<IActionResult> GetPostsByFilterAsync(int? categoryId, int? colorId)
     {
         var data = await _postRepository.SearchByFiltersAsync(categoryId, colorId);
+        
+        if (data.Count == 0)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NoEntitiesFoundException(nameof(Post)));
+
+            return NotFound(errorResponse);
+        }
+        
         var result = _mapper.Map<List<ShirtVm>>(data);
         return Ok(result);
     }
@@ -75,7 +109,7 @@ public class PostController : ControllerBase
     {
         var post = _mapper.Map<PostRequest, Post>(request);
         var result = await _postDomain.AddPostAsync(post, request.SizeIds);
-        return Ok(result);
+        return StatusCode(StatusCodes.Status201Created, result);
     }
 
     [HttpPut]

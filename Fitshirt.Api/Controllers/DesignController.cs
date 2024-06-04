@@ -1,12 +1,11 @@
 using System.ComponentModel;
 using AutoMapper;
 using Fitshirt.Api.Dtos.Designs;
-using Fitshirt.Api.Dtos.DesignShields;
 using Fitshirt.Api.Dtos.Posts;
-using Fitshirt.Api.Dtos.PostsSizes;
+using Fitshirt.Api.Errors;
+using Fitshirt.Domain.Exceptions;
 using Fitshirt.Domain.Features.Designs;
 using Fitshirt.Infrastructure.Models.Designs;
-using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Repositories.Designs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +31,15 @@ public class DesignController: ControllerBase
     public async Task<ActionResult> GetDesignsAsync()
     {
         var data = await _designRepository.GetAllAsync();
+        
+        if (data.Count == 0)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NoEntitiesFoundException(nameof(Design)));
+
+            return NotFound(errorResponse);
+        }
+        
         var result = _mapper.Map<List<ShirtVm>>(data);
         
         return Ok(result);
@@ -42,7 +50,13 @@ public class DesignController: ControllerBase
     public async Task<IActionResult> GetDesignByIdAsync(int id)
     {
         var data = await _designRepository.GetByIdAsync(id);
-        if (data == null) return NotFound();
+        if (data == null)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NotFoundEntityIdException(nameof(Design), id));
+
+            return NotFound(errorResponse);
+        }
         
         var designResponse = _mapper.Map<Design,DesignResponse>(data);
         
@@ -55,6 +69,15 @@ public class DesignController: ControllerBase
     public async Task<IActionResult> GetDesignByUserIdAsync(int userId)
     {
         var data = await _designRepository.GetDesignsByUserId(userId);
+        
+        if (data.Count == 0)
+        {
+            var errorResponse =
+                CodeErrorResponseFactory.CreateCodeErrorResponse(new NotFoundEntityIdException(nameof(User), userId));
+
+            return NotFound(errorResponse);
+        }
+        
         var result = _mapper.Map<List<ShirtVm>>(data);
         return Ok(result);
     }
@@ -62,43 +85,23 @@ public class DesignController: ControllerBase
     [HttpPost]
     public async Task<IActionResult> PostDesignAsync([FromBody] DesignRequest request)
     {
-        try
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            
-            var design = _mapper.Map<DesignRequest, Design>(request);
-            var result = await _designDomain.AddDesignAsync(design);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var design = _mapper.Map<DesignRequest, Design>(request);
+        var result = await _designDomain.AddDesignAsync(design);
+        return StatusCode(StatusCodes.Status201Created, result);
     }
 
     [HttpPut]
     public async Task<IActionResult> PutDesignAsync(int id, [FromBody] DesignRequest request)
     {
-        try
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            var design = _mapper.Map<DesignRequest, Design>(request);
-
-            var result = await _designDomain.UpdateDesignAsync(id, design);
-
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var design = _mapper.Map<DesignRequest, Design>(request);
+        var result = await _designDomain.UpdateDesignAsync(id, design);
+        return Ok(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteDesignAsync(int id)
     {
         var result = await _designDomain.DeleteAsync(id);
-
         return Ok(result);
     }
 }
