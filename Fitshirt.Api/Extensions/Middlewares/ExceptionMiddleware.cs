@@ -8,12 +8,10 @@ namespace Fitshirt.Api.Extensions.Middlewares;
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionMiddleware> _logger;
 
-    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public ExceptionMiddleware(RequestDelegate next)
     {
         _next = next;
-        _logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -30,33 +28,12 @@ public class ExceptionMiddleware
 
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        
         context.Response.ContentType = "application/json";
-        var statusCode = (int)HttpStatusCode.InternalServerError;
+        var codeErrorResponse = CodeErrorResponseFactory.CreateCodeErrorResponse(exception);
 
-        switch (exception)
-        {
-            case NotFoundEntityAttributeException:
-                statusCode = (int)HttpStatusCode.NotFound;
-                break;
-            case DuplicateEntityAttributeException:
-                statusCode = (int)HttpStatusCode.Conflict;
-                break;
-            case NotFoundInListException<int>:
-                statusCode = (int)HttpStatusCode.NotFound;
-                break;
-            case ValidationException:
-                statusCode = (int)HttpStatusCode.BadRequest;
-                break;
-            default:
-                break;
-        }
+        var result = JsonConvert.SerializeObject(codeErrorResponse);
 
-        var result = JsonConvert.SerializeObject(
-            new CodeErrorResponse(statusCode, exception.Message)
-        );
-
-        context.Response.StatusCode = statusCode;
+        context.Response.StatusCode = codeErrorResponse.StatusCode;
 
         await context.Response.WriteAsync(result);
     }
