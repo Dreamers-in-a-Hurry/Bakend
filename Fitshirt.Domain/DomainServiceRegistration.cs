@@ -1,5 +1,6 @@
 using Fitshirt.Domain.Features.Designs;
 using Fitshirt.Domain.Features.Posts;
+using Fitshirt.Domain.Features.Purchases;
 using Fitshirt.Domain.Features.Users;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ public static class DomainServiceRegistration
         services.AddScoped<IPostDomain, PostDomain>();
         services.AddScoped<IDesignDomain, DesignDomain>();
         services.AddScoped<IUserDomain, UserDomain>();
+        services.AddScoped<IPurchaseDomain, PurchaseDomain>();
 
         return services;
     }
