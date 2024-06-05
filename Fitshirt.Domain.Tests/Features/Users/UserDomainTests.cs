@@ -23,9 +23,5 @@ public class UserDomainTests
             _roleRepositoryMock.Object
         );
     }
-    
-    [Fact]
-    
-    public async Task 
-    
+
 }
