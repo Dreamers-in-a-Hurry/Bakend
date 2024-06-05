@@ -65,9 +65,9 @@ public class DesignDomainTests
         Assert.True(result);
 
         _userRepositoryMock.Verify(repo => repo.GetByIdAsync(design.UserId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.PrimaryColorId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.SecondaryColorId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.TertiaryColorId), Times.Once);
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.PrimaryColorId), Times.Exactly(3));
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.SecondaryColorId), Times.Exactly(3));
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.TertiaryColorId), Times.Exactly(3));
         _shieldRepositoryMock.Verify(repo => repo.GetByIdAsync(design.ShieldId), Times.Once);
         _designRepositoryMock.Verify(repo => repo.AddAsync(design), Times.Once);
     }
@@ -236,9 +236,9 @@ public class DesignDomainTests
         Assert.True(result);
 
         _userRepositoryMock.Verify(repo => repo.GetByIdAsync(design.UserId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.PrimaryColorId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.SecondaryColorId), Times.Once);
-        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.TertiaryColorId), Times.Once);
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.PrimaryColorId), Times.Exactly(3));
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.SecondaryColorId), Times.Exactly(3));
+        _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.TertiaryColorId), Times.Exactly(3));
         _shieldRepositoryMock.Verify(repo => repo.GetByIdAsync(design.ShieldId), Times.Once);
         _designRepositoryMock.Verify(repo => repo.UpdateAsync(design.Id, design), Times.Once);
     }
