@@ -1,6 +1,8 @@
+using System.Collections;
 using Fitshirt.Infrastructure.Models.Common;
 using Fitshirt.Infrastructure.Models.Common.Entities;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
+using Fitshirt.Infrastructure.Models.Purchases.Entities;
 using Fitshirt.Infrastructure.Models.Users;
 
 namespace Fitshirt.Infrastructure.Models.Posts;
@@ -19,6 +21,7 @@ public sealed class Post : BaseModel
     public Color Color { get; set; }
     
     public ICollection<PostSize> PostSizes { get; set; }
+    public ICollection<Item> Items { get; set; } = new List<Item>();
     
     public int UserId { get; set; }
     public User User { get; set; }

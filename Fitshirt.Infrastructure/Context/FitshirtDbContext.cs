@@ -83,9 +83,9 @@ public class FitshirtDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
         
         builder.Entity<User>()
-            .HasMany(user => user.Items)
-            .WithOne(item => item.User)
-            .HasForeignKey(item => item.UserId)
+            .HasMany(user => user.Purchases)
+            .WithOne(purchase => purchase.User)
+            .HasForeignKey(purchase => purchase.UserId)
             .IsRequired(true)
             .OnDelete(DeleteBehavior.Cascade);
         

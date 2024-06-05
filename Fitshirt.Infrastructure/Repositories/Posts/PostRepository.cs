@@ -118,4 +118,26 @@ public class PostRepository : IPostRepository
             )
             .ToListAsync();
     }
+
+    public async Task<bool> ModifyStockInPostAsync(int id, int quantity)
+    {
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+        try
+        {
+            var postToUpdate = _context.Posts.FirstOrDefault(post => post.Id == id);
+
+            postToUpdate!.Stock = postToUpdate.Stock-quantity;
+          
+            _context.Posts.Update(postToUpdate);
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+        catch (Exception e)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+
+        return true;
+    }
 }
