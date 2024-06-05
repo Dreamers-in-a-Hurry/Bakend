@@ -105,7 +105,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("PrimaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(notExistingPrimaryColorId, design.PrimaryColorId);
     }
 
@@ -124,7 +124,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("SecondaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(notExistingSecondaryColorId, design.SecondaryColorId);
     }
 
@@ -143,7 +143,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("TertiaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(notExistingTertiaryColorId, design.TertiaryColorId);
     }
 
@@ -300,7 +300,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("PrimaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(idNotFound, design.PrimaryColorId);
     }
 
@@ -321,7 +321,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("SecondaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(idNotFound, design.SecondaryColorId);
     }
 
@@ -342,7 +342,7 @@ public class DesignDomainTests
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("TertiaryColor", nameof(Color));
+        Assert.Equal("Color", nameof(Color));
         Assert.Equal(idNotFound, design.TertiaryColorId);
     }
 
