@@ -2,8 +2,10 @@ using AutoMapper;
 using Fitshirt.Api.Dtos.Categories;
 using Fitshirt.Api.Dtos.Colors;
 using Fitshirt.Api.Dtos.Designs;
+using Fitshirt.Api.Dtos.Items;
 using Fitshirt.Api.Dtos.Posts;
 using Fitshirt.Api.Dtos.PostsSizes;
+using Fitshirt.Api.Dtos.Purchases;
 using Fitshirt.Api.Dtos.Shields;
 using Fitshirt.Api.Dtos.Sizes;
 using Fitshirt.Api.Dtos.Users;
@@ -12,6 +14,8 @@ using Fitshirt.Infrastructure.Models.Designs;
 using Fitshirt.Infrastructure.Models.Designs.Entities;
 using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
+using Fitshirt.Infrastructure.Models.Purchases;
+using Fitshirt.Infrastructure.Models.Purchases.Entities;
 using Fitshirt.Infrastructure.Models.Users;
 
 namespace Fitshirt.Api.Mapping;
@@ -41,6 +45,11 @@ public class MappingProfile : Profile
         CreateMap<UserLoginRequest, User>();
         CreateMap<UserRegisterRequest, User>();
         CreateMap<UserRequest, User>();
+
+        CreateMap<ItemRequest, Item>();
+        CreateMap<PurchaseRequest, Purchase>();
+        CreateMap<Purchase, PurchaseResponse>();
+        CreateMap<Item, ItemResponse>();
     }
     
 }

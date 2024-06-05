@@ -1,7 +1,7 @@
 using Fitshirt.Infrastructure.Models.Common;
 using Fitshirt.Infrastructure.Models.Designs;
 using Fitshirt.Infrastructure.Models.Posts;
-using Fitshirt.Infrastructure.Models.Purchases.Entities;
+using Fitshirt.Infrastructure.Models.Purchases;
 using Fitshirt.Infrastructure.Models.Users.Entities;
 using Fitshirt.Infrastructure.Models.Users.ValueObjects;
 
@@ -27,6 +27,6 @@ public sealed class User : BaseModel
     public Service? Service { get; set; }
 
     public ICollection<Design> Designs { get; set; } = new List<Design>();
-    public ICollection<Item> Items { get; set; } = new List<Item>();
+    public ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
     public ICollection<Post> Posts { get; set; } = new List<Post>();
 }

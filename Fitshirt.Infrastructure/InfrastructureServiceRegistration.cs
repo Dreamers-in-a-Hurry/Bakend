@@ -2,6 +2,7 @@ using Fitshirt.Infrastructure.Context;
 using Fitshirt.Infrastructure.Repositories.Common.Entites;
 using Fitshirt.Infrastructure.Repositories.Designs;
 using Fitshirt.Infrastructure.Repositories.Posts;
+using Fitshirt.Infrastructure.Repositories.Purchases;
 using Fitshirt.Infrastructure.Repositories.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,8 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<ISizeRepository, SizeRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IServiceRepository, ServiceRepository>();
+        services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+        services.AddScoped<IItemRepository, ItemRepository>();
         
         return services;
     }

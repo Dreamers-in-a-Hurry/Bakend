@@ -11,10 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Purchases\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Remove="Features\Users\**" />
       <Compile Include="Features\Users\IUserDomain.cs" />
       <Compile Include="Features\Users\UserDomain.cs" />

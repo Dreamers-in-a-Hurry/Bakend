@@ -3,7 +3,7 @@ using Fitshirt.Infrastructure.Models.Designs;
 using Fitshirt.Infrastructure.Models.Designs.Entities;
 using Fitshirt.Infrastructure.Models.Posts;
 using Fitshirt.Infrastructure.Models.Posts.Entities;
-using Fitshirt.Infrastructure.Models.Purchases.Entities;
+using Fitshirt.Infrastructure.Models.Purchases;
 using Fitshirt.Infrastructure.Models.Users;
 using Fitshirt.Infrastructure.Models.Users.Entities;
 using Newtonsoft.Json;
@@ -90,7 +90,7 @@ public class FitshirtDbContextData
                     RoleId = 1,
                     ServiceId = 1,
                     Designs = new List<Design>(),
-                    Items = new List<Item>(),
+                    Purchases = new List<Purchase>(),
                     Posts = new List<Post>()
                 };
 
