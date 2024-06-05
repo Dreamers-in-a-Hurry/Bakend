@@ -232,17 +232,18 @@ public class DesignDomainTests
             .ReturnsAsync(true);
 
         var result = await _designDomain.UpdateDesignAsync(design.Id, design);
-        
+
         Assert.True(result);
-        
+
         _userRepositoryMock.Verify(repo => repo.GetByIdAsync(design.UserId), Times.Once);
         _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.PrimaryColorId), Times.Once);
         _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.SecondaryColorId), Times.Once);
         _colorRepositoryMock.Verify(repo => repo.GetByIdAsync(design.TertiaryColorId), Times.Once);
         _shieldRepositoryMock.Verify(repo => repo.GetByIdAsync(design.ShieldId), Times.Once);
-        _designRepositoryMock.Verify(repo => repo.UpdateAsync(design.Id,design),Times.Once);
+        _designRepositoryMock.Verify(repo => repo.UpdateAsync(design.Id, design), Times.Once);
+    }
 
-        [Fact]
+    [Fact]
 
         public async Task UpdateDesignAsync_InvalidDesignId_ThrowsNotFoundEntityIdException()
         {
@@ -365,8 +366,5 @@ public class DesignDomainTests
         Assert.Equal("Shield", nameof(Shield));
         Assert.Equal(idNotFound, design.ShieldId);
     }
-
-
-    }
-
 }
+    
