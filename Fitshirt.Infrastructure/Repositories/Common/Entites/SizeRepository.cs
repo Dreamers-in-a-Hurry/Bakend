@@ -18,9 +18,9 @@ public class SizeRepository : ISizeRepository
         throw new NotImplementedException();
     }
 
-    public Task<Size?> GetByIdAsync(int id)
+    public async Task<Size?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Sizes.Where(size => size.IsEnable && size.Id == id).FirstOrDefaultAsync();
     }
 
     public Task<bool> AddAsync(Size entity)
