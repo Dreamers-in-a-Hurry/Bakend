@@ -78,7 +78,7 @@ public class PurchaseDomainTests
     }
     
     [Fact]
-    public async Task AddPurchaseAsync_InvalidUserId_ReturnsTrue()
+    public async Task AddPurchaseAsync_InvalidUserId_ThrowsNotFoundEntityIdException()
     {
         // Arrange
         const int notExistingUserId = 9999;
@@ -114,7 +114,7 @@ public class PurchaseDomainTests
     }
     
     [Fact]
-    public async Task AddPurchaseAsync_InvalidPostId_ReturnsTrue()
+    public async Task AddPurchaseAsync_InvalidPostId_ThrowsNotFoundEntityIdException()
     {
         // Arrange
         const int notExistingPostId = 9999;
@@ -150,7 +150,7 @@ public class PurchaseDomainTests
     }
     
     [Fact]
-    public async Task AddPurchaseAsync_InvalidSizeId_ReturnsTrue()
+    public async Task AddPurchaseAsync_InvalidSizeId_ThrowsNotFoundEntityIdException()
     {
         // Arrange
         const int notExistingSizeId = 9999;
@@ -186,7 +186,7 @@ public class PurchaseDomainTests
     }
     
     [Fact]
-    public async Task AddPurchaseAsync_InvalidQuantity_ReturnsTrue()
+    public async Task AddPurchaseAsync_InvalidQuantity_ThrowsValidationException()
     {
         // Arrange
         const int quantity = 9999;
