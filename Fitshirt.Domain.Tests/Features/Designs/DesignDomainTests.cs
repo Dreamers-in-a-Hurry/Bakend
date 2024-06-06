@@ -9,7 +9,7 @@ using Fitshirt.Infrastructure.Repositories.Designs;
 using Fitshirt.Infrastructure.Repositories.Users;
 using Moq;
 
-namespace Fitshirt.Domain.Tests.Features.Posts;
+namespace Fitshirt.Domain.Tests.Features.Designs;
 
 public class DesignDomainTests
 {
@@ -79,15 +79,28 @@ public class DesignDomainTests
         var design = new Design
         {
             UserId = notExistingUserId,
+            PrimaryColorId = 1,
+            SecondaryColorId = 1,
+            TertiaryColorId = 1,
+            ShieldId = 1
         };
+        
         _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
             .ReturnsAsync((User)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color { Id = design.SecondaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("User", nameof(User));
-        Assert.Equal(notExistingUserId, design.UserId);
+        Assert.Equal("User", exception.EntityName);
+        Assert.Equal(notExistingUserId, exception.AttributeValue);
     }
 
     [Fact]
@@ -99,14 +112,22 @@ public class DesignDomainTests
             PrimaryColorId = notExistingPrimaryColorId
         };
 
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
             .ReturnsAsync((Color)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color { Id = design.SecondaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(notExistingPrimaryColorId, design.PrimaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(notExistingPrimaryColorId, exception.AttributeValue);
     }
 
     [Fact]
@@ -118,14 +139,22 @@ public class DesignDomainTests
             SecondaryColorId = notExistingSecondaryColorId
         };
 
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
             .ReturnsAsync((Color)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(notExistingSecondaryColorId, design.SecondaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(notExistingSecondaryColorId, exception.AttributeValue);
     }
 
     [Fact]
@@ -137,14 +166,22 @@ public class DesignDomainTests
             TertiaryColorId = notExistingTertiaryColorId
         };
 
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color {Id = design.SecondaryColorId});
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
             .ReturnsAsync((Color)null);
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(notExistingTertiaryColorId, design.TertiaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(notExistingTertiaryColorId, exception.AttributeValue);
     }
 
     [Fact]
@@ -157,14 +194,22 @@ public class DesignDomainTests
             ShieldId = notExistingShieldId
         };
 
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color {Id = design.SecondaryColorId});
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
         _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
             .ReturnsAsync((Shield)null);
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Shield", nameof(Shield));
-        Assert.Equal(notExistingShieldId, design.ShieldId);
+        Assert.Equal("Shield", exception.EntityName);
+        Assert.Equal(notExistingShieldId, exception.AttributeValue);
     }
 
     [Fact]
@@ -202,8 +247,8 @@ public class DesignDomainTests
         var result = async () => await _designDomain.DeleteAsync(design.Id);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Design", nameof(Design));
-        Assert.Equal(idNotFound, design.Id);
+        Assert.Equal("Design", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -244,24 +289,23 @@ public class DesignDomainTests
     }
 
     [Fact]
-
-        public async Task UpdateDesignAsync_InvalidDesignId_ThrowsNotFoundEntityIdException()
+    public async Task UpdateDesignAsync_InvalidDesignId_ThrowsNotFoundEntityIdException()
+    {
+        var idNotFound = 999;
+        var design = new Design()
         {
-            var idNotFound = 999;
-            var design = new Design()
-            {
-                Id = idNotFound
-            };
+            Id = idNotFound
+        };
 
-            _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
-                .ReturnsAsync((Design)null);
+        _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
+            .ReturnsAsync((Design)null);
 
-            var result = async () => await _designDomain.UpdateDesignAsync(idNotFound, design);
+        var result = async () => await _designDomain.UpdateDesignAsync(idNotFound, design);
 
-            var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-            Assert.Equal("Design",nameof(Design));
-            Assert.Equal(idNotFound,design.Id);
-        }
+        var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
+        Assert.Equal("Design",exception.EntityName);
+        Assert.Equal(idNotFound,exception.AttributeValue);
+    }
         
         [Fact]
     public async Task UpdateDesignAsync_InvalidUserId_ThrowsNotFoundEntityIdException()
@@ -269,18 +313,28 @@ public class DesignDomainTests
         var idNotFound = 999;
         var design = new Design()
         {
+            Id = 1,
             UserId = idNotFound,
         };
+        
         _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
             .ReturnsAsync(new Design { Id = 1 });
         _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
             .ReturnsAsync((User)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color { Id = design.SecondaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("User", nameof(User));
-        Assert.Equal(idNotFound, design.UserId);
+        Assert.Equal("User", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -289,19 +343,29 @@ public class DesignDomainTests
         var idNotFound = 999;
         var design = new Design()
         {
+            Id = 1,
             PrimaryColorId = 999
         };
         
         _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
             .ReturnsAsync(new Design { Id = 1 });
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = 1 });
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
             .ReturnsAsync((Color)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color { Id = 1 });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = 1 });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = 1 });
+
 
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(idNotFound, design.PrimaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -315,14 +379,22 @@ public class DesignDomainTests
 
         _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
             .ReturnsAsync(new Design { Id = 1 });
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
             .ReturnsAsync((Color)null);
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = design.TertiaryColorId });
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.AddDesignAsync(design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(idNotFound, design.SecondaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -331,19 +403,28 @@ public class DesignDomainTests
         var idNotFound = 999;
         var design = new Design
         {
+            Id = 1,
             TertiaryColorId = 999
         };
 
         _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
             .ReturnsAsync(new Design { Id = 1 });
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = design.UserId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = design.PrimaryColorId });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color {Id = design.SecondaryColorId});
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
             .ReturnsAsync((Color)null);
+        _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
+            .ReturnsAsync(new Shield { Id = design.ShieldId });
 
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(idNotFound, design.TertiaryColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -352,19 +433,28 @@ public class DesignDomainTests
         var idNotFound = 999;
         var design = new Design()
         {
+            Id = 1,
             ShieldId = idNotFound
         };
 
         _designRepositoryMock.Setup(repo => repo.GetByIdAsync(design.Id))
             .ReturnsAsync(new Design { Id = 1 });
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(design.UserId))
+            .ReturnsAsync(new User { Id = 1 });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.PrimaryColorId))
+            .ReturnsAsync(new Color { Id = 1 });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.SecondaryColorId))
+            .ReturnsAsync(new Color {Id = 1 });
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(design.TertiaryColorId))
+            .ReturnsAsync(new Color { Id = 1 });
         _shieldRepositoryMock.Setup(repo => repo.GetByIdAsync(design.ShieldId))
             .ReturnsAsync((Shield)null);
 
         var result = async () => await _designDomain.UpdateDesignAsync(1,design);
 
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Shield", nameof(Shield));
-        Assert.Equal(idNotFound, design.ShieldId);
+        Assert.Equal("Shield", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 }
     
