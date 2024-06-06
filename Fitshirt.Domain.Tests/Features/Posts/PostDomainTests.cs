@@ -95,8 +95,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("User", nameof(User));
-        Assert.Equal(notExistingUserId, post.UserId);
+        Assert.Equal("User", exception.EntityName);
+        Assert.Equal(notExistingUserId, exception.AttributeValue);
     }
     
     [Fact]
@@ -106,11 +106,15 @@ public class PostDomainTests
         var notExistingCategoryId = 9999;
         var post = new Post
         {
+            UserId = 1,
             CategoryId = notExistingCategoryId, 
         };
         var sizeIds = new List<int> { 1, 2 };
 
-        _categoryRepositoryMock.Setup(repo => repo.GetByIdAsync(post.CategoryId))
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
+            .ReturnsAsync(new User {Id = post.UserId});
+        _categoryRepositoryMock
+            .Setup(repo => repo.GetByIdAsync(post.CategoryId))
             .ReturnsAsync((Category)null);
         
         // Act
@@ -118,8 +122,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Category", nameof(Category));
-        Assert.Equal(notExistingCategoryId, post.CategoryId);
+        Assert.Equal("Category", exception.EntityName);
+        Assert.Equal(notExistingCategoryId, exception.AttributeValue);
     }
     
     [Fact]
@@ -129,10 +133,17 @@ public class PostDomainTests
         var notExistingColorId = 9999;
         var post = new Post
         {
+            UserId = 1,
+            CategoryId = 1, 
             ColorId = notExistingColorId
         };
         var sizeIds = new List<int> { 1, 2 };
 
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
+            .ReturnsAsync(new User {Id = post.UserId});
+        _categoryRepositoryMock
+            .Setup(repo => repo.GetByIdAsync(post.CategoryId))
+            .ReturnsAsync(new Category{Id = post.CategoryId});
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(post.ColorId))
             .ReturnsAsync((Color)null);
         
@@ -141,8 +152,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(notExistingColorId, post.ColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(notExistingColorId, exception.AttributeValue);
     }
     
     [Fact]
@@ -156,7 +167,7 @@ public class PostDomainTests
             CategoryId = 1, 
             ColorId = 1
         };
-        var sizeIds = new List<int> { 1, notExistingSizeId };
+        var sizeIds = new List<int> { notExistingSizeId };
 
         _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
             .ReturnsAsync(new User { Id = post.UserId });
@@ -165,18 +176,16 @@ public class PostDomainTests
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(post.ColorId))
             .ReturnsAsync(new Color { Id = post.ColorId });
         _sizeRepositoryMock.Setup(repo => repo.GetSizesByIdsAsync(sizeIds))
-            .ReturnsAsync(new List<Size>
-            {
-                new Size { Id = 1 }
-            });
+            .ReturnsAsync(new List<Size>{});
         
         // Act
         var result = async()=> await _postDomain.AddPostAsync(post, sizeIds);
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundInListException<int>>(result);
-        Assert.Equal("Size", nameof(Size));
-        Assert.Equal("Id", nameof(Size.Id));
+        Assert.Equal("Size", exception.Name);
+        Assert.Equal("Id", exception.Key);
+        Assert.Equal(sizeIds, exception.MissingItems);
     }
 
     [Fact]
@@ -218,8 +227,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Post", nameof(Post));
-        Assert.Equal(idNotFound, post.Id);
+        Assert.Equal("Post", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
 
     [Fact]
@@ -281,8 +290,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Post", nameof(Post));
-        Assert.Equal(idNotFound, post.Id);
+        Assert.Equal("Post", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
     
     [Fact]
@@ -292,6 +301,7 @@ public class PostDomainTests
         var idNotFound = 999;
         var post = new Post()
         {
+            Id = 1,
             UserId = idNotFound
         };
         var sizeIds = new List<int> { 1, 2 };
@@ -306,8 +316,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("User", nameof(User));
-        Assert.Equal(idNotFound, post.UserId);
+        Assert.Equal("User", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
     
     [Fact]
@@ -317,12 +327,16 @@ public class PostDomainTests
         var idNotFound = 999;
         var post = new Post()
         {
+            Id = 1,
+            UserId = 1,
             CategoryId = idNotFound
         };
         var sizeIds = new List<int> { 1, 2 };
 
         _postRepositoryMock.Setup(repo => repo.GetByIdAsync(post.Id))
             .ReturnsAsync(new Post{Id = 1});
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
+            .ReturnsAsync(new User { Id = post.UserId });
         _categoryRepositoryMock.Setup(repo => repo.GetByIdAsync(post.CategoryId))
             .ReturnsAsync((Category)null);
         
@@ -331,8 +345,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Category", nameof(Category));
-        Assert.Equal(idNotFound, post.CategoryId);
+        Assert.Equal("Category", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
     
     [Fact]
@@ -342,12 +356,19 @@ public class PostDomainTests
         var idNotFound = 999;
         var post = new Post()
         {
-            ColorId = 999
+            Id = 1,
+            UserId = 1,
+            CategoryId = 1,
+            ColorId = idNotFound
         };
         var sizeIds = new List<int> { 1, 2 };
 
         _postRepositoryMock.Setup(repo => repo.GetByIdAsync(post.Id))
             .ReturnsAsync(new Post{Id = 1});
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
+            .ReturnsAsync(new User { Id = post.UserId });
+        _categoryRepositoryMock.Setup(repo => repo.GetByIdAsync(post.CategoryId))
+            .ReturnsAsync(new Category {Id = post.CategoryId});
         _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(post.ColorId))
             .ReturnsAsync((Color)null);
         
@@ -356,8 +377,8 @@ public class PostDomainTests
         
         // Assert
         var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Color", nameof(Color));
-        Assert.Equal(idNotFound, post.ColorId);
+        Assert.Equal("Color", exception.EntityName);
+        Assert.Equal(idNotFound, exception.AttributeValue);
     }
     
     [Fact]
@@ -365,24 +386,34 @@ public class PostDomainTests
     {
         // Arrange
         var idNotFound = 999;
-        var post = new Post();
-        var sizeIds = new List<int> { 1, idNotFound };
+        var post = new Post()
+        {
+            Id = 1,
+            UserId = 1,
+            CategoryId = 1,
+            ColorId = idNotFound
+        };
+        var sizeIds = new List<int> { idNotFound };
 
         _postRepositoryMock.Setup(repo => repo.GetByIdAsync(post.Id))
             .ReturnsAsync(new Post{Id = 1});
+        _userRepositoryMock.Setup(repo => repo.GetByIdAsync(post.UserId))
+            .ReturnsAsync(new User { Id = post.UserId });
+        _categoryRepositoryMock.Setup(repo => repo.GetByIdAsync(post.CategoryId))
+            .ReturnsAsync(new Category {Id = post.CategoryId});
+        _colorRepositoryMock.Setup(repo => repo.GetByIdAsync(post.ColorId))
+            .ReturnsAsync(new Color { Id = post.ColorId });
         _sizeRepositoryMock.Setup(repo => repo.GetSizesByIdsAsync(sizeIds))
-            .ReturnsAsync(new List<Size>
-            {
-                new Size { Id = 1 }
-            });
+            .ReturnsAsync(new List<Size>{});
         
         // Act
         var result = async () => await _postDomain.UpdatePostAsync(1, post, sizeIds);
         
         // Assert
-        var exception = await Assert.ThrowsAsync<NotFoundEntityIdException>(result);
-        Assert.Equal("Size", nameof(Size));
-        Assert.Equal("Id", nameof(Size.Id));
+        var exception = await Assert.ThrowsAsync<NotFoundInListException<int>>(result);
+        Assert.Equal("Size", exception.Name);
+        Assert.Equal("Id", exception.Key);
+        Assert.Equal(sizeIds, exception.MissingItems);
     }
     
 }
