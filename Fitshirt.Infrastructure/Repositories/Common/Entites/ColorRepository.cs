@@ -13,9 +13,9 @@ public class ColorRepository : IColorRepository
         _context = context;
     }
 
-    public Task<IReadOnlyList<Color>> GetAllAsync()
+    public async Task<IReadOnlyList<Color>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Colors.Where(color => color.IsEnable).ToListAsync();
     }
 
     public async Task<Color?> GetByIdAsync(int id)

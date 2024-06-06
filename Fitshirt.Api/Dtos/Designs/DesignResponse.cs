@@ -10,6 +10,7 @@ public class DesignResponse
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public string Image { get; set; }
     public ColorResponse PrimaryColor { get; set; }
     public ColorResponse SecondaryColor { get; set; }
     public ColorResponse TertiaryColor { get; set; }

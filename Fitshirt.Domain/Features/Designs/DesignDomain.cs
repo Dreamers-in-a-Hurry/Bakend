@@ -47,6 +47,9 @@ public class DesignDomain : IDesignDomain
 
     public async Task<bool> AddDesignAsync(Design design)
     {
+        design.Image =
+            "https://cdn.discordapp.com/attachments/998840308617990165/1247985900265144330/camiseta-personalizada.png?ex=666204f1&is=6660b371&hm=2c9d505baaffbf4dda89274edf37ee4b9605ef3a71e4f6b0f8e1a5bcbe66841e&";
+        
         var user = await _userRepository.GetByIdAsync(design.UserId);
 
         if (user == null)

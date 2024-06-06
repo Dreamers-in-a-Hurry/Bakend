@@ -13,9 +13,9 @@ public class CategoryRepository : ICategoryRepository
         _context = context;
     }
 
-    public Task<IReadOnlyList<Category>> GetAllAsync()
+    public async Task<IReadOnlyList<Category>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Categories.Where(category => category.IsEnable).ToListAsync();
     }
 
     public async Task<Category?> GetByIdAsync(int id)

@@ -12,9 +12,9 @@ public class ShieldRepository : IShieldRepository
     {
         _context = context;
     }
-    public Task<IReadOnlyList<Shield>> GetAllAsync()
+    public async Task<IReadOnlyList<Shield>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Shields.Where(shield => shield.IsEnable).ToListAsync();
     }
 
     public async Task<Shield?> GetByIdAsync(int id)

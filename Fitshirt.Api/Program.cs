@@ -33,6 +33,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
+app.UseCors(builder =>
+{
+    builder
+        .WithOrigins("http://localhost:5173")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+});
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
