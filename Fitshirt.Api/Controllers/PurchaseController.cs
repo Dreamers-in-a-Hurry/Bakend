@@ -96,11 +96,16 @@ public class PurchaseController : ControllerBase
     /// <remarks>
     /// Sample request:
     ///
-    ///     POST /Todo
+    ///     POST /api/v1/purchases
     ///     {
-    ///        "id": 1,
-    ///        "name": "Item #1",
-    ///        "isComplete": true
+    ///        "userId": 1,
+    ///        "items": [
+    ///        {
+    ///          "postId": "The post Id",
+    ///          "sizeId": "The size Id",
+    ///          "quantity": 1
+    ///        }
+    /// ]
     ///     }
     ///
     /// </remarks>
