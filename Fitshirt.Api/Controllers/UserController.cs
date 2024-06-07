@@ -24,6 +24,10 @@ public class UserController : ControllerBase
         _mapper = mapper;
     }
 
+    /// GET: api/v1/users
+    /// <summary>
+    /// Get a List of All Users.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetUsersAsync()
     {
@@ -42,6 +46,10 @@ public class UserController : ControllerBase
         return Ok(result);
     }
 
+    /// PUT: api/v1/users
+    /// <summary>
+    /// Modify a User.
+    /// </summary>
     [HttpPut]
     public async Task<IActionResult> PutUserAsync(int id, [FromBody] UserRequest request)
     {
@@ -60,6 +68,10 @@ public class UserController : ControllerBase
         return Ok(result);
     }
 
+    /// DELETE: api/v1/users
+    /// <summary>
+    /// Delete a User.
+    /// </summary>
     [HttpDelete]
     public async Task<IActionResult> DeleteUserAsync(int id)
     {

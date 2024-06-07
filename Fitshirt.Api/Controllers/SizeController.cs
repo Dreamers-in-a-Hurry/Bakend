@@ -21,6 +21,10 @@ public class SizeController : ControllerBase
         _mapper = mapper;
     }
     
+    /// GET: api/v1/sizes
+    /// <summary>
+    /// Get a List of All Shirt Sizes.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetSizesAsync()
     {
@@ -39,6 +43,10 @@ public class SizeController : ControllerBase
         return Ok(result);
     }
     
+    /// GET: api/v1/sizes/{id}
+    /// <summary>
+    /// Get a List of Shirt Sizes by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSizeByIdAsync(int id)
     {

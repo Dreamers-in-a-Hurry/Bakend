@@ -21,7 +21,10 @@ public class CategoryController : ControllerBase
         _categoryRepository = categoryRepository;
         _mapper = mapper;
     }
-    
+    /// GET: api/v1/categories
+    /// <summary>
+    /// Get a List of All Categories.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetCategoriesAsync()
     {
@@ -39,7 +42,10 @@ public class CategoryController : ControllerBase
         
         return Ok(result);
     }
-    
+    /// GET: api/v1/categories/{id}
+    /// <summary>
+    /// Get a List of Categories by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDesignByIdAsync(int id)
     {

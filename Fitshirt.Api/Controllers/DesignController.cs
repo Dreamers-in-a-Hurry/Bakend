@@ -25,7 +25,10 @@ public class DesignController: ControllerBase
         _designRepository = designRepository;
         _mapper = mapper;
     }
-    
+    /// GET: api/v1/designs
+    /// <summary>
+    /// Get a List of Designs Created.
+    /// </summary>
     [HttpGet]
     [Description("Get designs in view mode for catalogue")]
     public async Task<ActionResult> GetDesignsAsync()
@@ -44,7 +47,10 @@ public class DesignController: ControllerBase
         
         return Ok(result);
     }
-    
+    /// /// GET: api/v1/designs/{id}
+    /// <summary>
+    /// Get a list of Designs by Id.
+    /// </summary>
     [HttpGet("{id}")]
     [Description("Get designs in details for catalogue description and for designs details")]
     public async Task<IActionResult> GetDesignByIdAsync(int id)
@@ -62,7 +68,10 @@ public class DesignController: ControllerBase
         
         return Ok(designResponse);
     }
-
+    /// /// GET: api/v1/designs/SearchByUser
+    /// <summary>
+    /// Get a Design by UserId.
+    /// </summary>
     [HttpGet]
     [Route("SearchByUser")]
     [Description("Get designs in view mode published by an user")]
@@ -81,7 +90,10 @@ public class DesignController: ControllerBase
         var result = _mapper.Map<List<ShirtVm>>(data);
         return Ok(result);
     }
-
+    /// POST: api/v1/designs
+    /// <summary>
+    /// Create a Design
+    /// </summary>
     [HttpPost]
     public async Task<IActionResult> PostDesignAsync([FromBody] DesignRequest request)
     {
@@ -89,7 +101,10 @@ public class DesignController: ControllerBase
         var result = await _designDomain.AddDesignAsync(design);
         return StatusCode(StatusCodes.Status201Created, result);
     }
-
+    /// /// PUT: api/v1/designs
+    /// <summary>
+    /// Modify a Design
+    /// </summary>
     [HttpPut]
     public async Task<IActionResult> PutDesignAsync(int id, [FromBody] DesignRequest request)
     {
@@ -97,7 +112,10 @@ public class DesignController: ControllerBase
         var result = await _designDomain.UpdateDesignAsync(id, design);
         return Ok(result);
     }
-
+    /// DELETE: api/v1/designs/{id}
+    /// <summary>
+    /// Delete a Design by Id
+    /// </summary>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteDesignAsync(int id)
     {

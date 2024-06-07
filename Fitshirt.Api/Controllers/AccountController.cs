@@ -21,7 +21,11 @@ public class AccountController : ControllerBase
         _userRepository = userRepository;
         _mapper = mapper;
     }
-
+    
+    /// POST: api/v1/account/register
+    /// <summary>
+    /// Create an Account.
+    /// </summary>
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
@@ -36,7 +40,12 @@ public class AccountController : ControllerBase
         
         return Ok(result);
     }
-
+    
+    /// POST: api/v1/account/login
+    /// <summary>
+    /// Log in to an Account.
+    /// </summary>
+    ///
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequest request)

@@ -26,6 +26,10 @@ public class PostController : ControllerBase
         _mapper = mapper;
     }
 
+    /// GET: api/v1/post
+    /// <summary>
+    /// Get a List of Posts Created.
+    /// </summary>
     [HttpGet]
     [Description("Get posts in view mode for catalogue")]
     public async Task<ActionResult> GetPostsAsync()
@@ -45,6 +49,10 @@ public class PostController : ControllerBase
         return Ok(result);
     }
     
+    /// /// GET: api/v1/posts/{id}
+    /// <summary>
+    /// Get a list of Posts by Id.
+    /// </summary>
     [HttpGet("{id}")]
     [Description("Get posts in details for catalogue description and for published details")]
     public async Task<IActionResult> GetPostByIdAsync(int id)
@@ -65,7 +73,11 @@ public class PostController : ControllerBase
         return Ok(postResponse);
         
     }
-
+    
+    /// /// GET: api/v1/posts/SearchByUser
+    /// <summary>
+    /// Get a Post by UserId.
+    /// </summary>
     [HttpGet]
     [Route("SearchByUser")]
     [Description("Get posts in view mode published by an user")]
@@ -85,6 +97,10 @@ public class PostController : ControllerBase
         return Ok(result);
     }
     
+    /// GET: api/v1/posts/filter-shirts
+    /// <summary>
+    /// Get a List of Posts with Filters
+    /// </summary>
     [HttpGet]
     [Route("filter-shirts")]
     [Description("Get posts in view mode by filters")]
@@ -104,6 +120,10 @@ public class PostController : ControllerBase
         return Ok(result);
     }
 
+    /// POST: api/v1/posts
+    /// <summary>
+    /// Create a Post
+    /// </summary>
     [HttpPost]
     public async Task<IActionResult> PostPostAsync([FromBody] PostRequest request)
     {
@@ -112,6 +132,10 @@ public class PostController : ControllerBase
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
+    /// /// PUT: api/v1/posts
+    /// <summary>
+    /// Modify a Post
+    /// </summary>
     [HttpPut]
     public async Task<IActionResult> PutPostAsync(int id, [FromBody] PostRequest request)
     {
@@ -120,6 +144,10 @@ public class PostController : ControllerBase
         return Ok(result);
     }
 
+    /// DELETE: api/v1/posts/{id}
+    /// <summary>
+    /// Delete a Post by Id
+    /// </summary>
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePostAsync(int id)
     {

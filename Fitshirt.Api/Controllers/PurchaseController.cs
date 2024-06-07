@@ -24,6 +24,10 @@ public class PurchaseController : ControllerBase
         _mapper = mapper;
     }
 
+    /// GET: api/v1/purchases
+    /// <summary>
+    /// Get a List of All Purchases.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetPurchasesAsync()
     {
@@ -42,6 +46,10 @@ public class PurchaseController : ControllerBase
         return Ok(result);
     }
 
+    /// GET: api/v1/purchases/{id}
+    /// <summary>
+    /// Get a List of Purchases by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetPurchaseByIdAsync(int id)
     {
@@ -59,6 +67,10 @@ public class PurchaseController : ControllerBase
         return Ok(purchaseResponse);
     }
     
+    /// GET: api/v1/purchases
+    /// <summary>
+    /// Get a Purchase by UserId.
+    /// </summary>
     [HttpGet]
     [Route("search-by-user")]
     public async Task<IActionResult> GetPurchasesByUserIdAsync(int userId)
@@ -77,6 +89,10 @@ public class PurchaseController : ControllerBase
         return Ok(result);
     }
 
+    /// POST: api/v1/purchases
+    /// <summary>
+    /// Buy a Shirt.
+    /// </summary>
     [HttpPost]
     public async Task<IActionResult> PostPurchaseAsync([FromBody] PurchaseRequest request)
     {

@@ -21,6 +21,10 @@ public class ShieldController : ControllerBase
         _mapper = mapper;
     }
     
+    /// GET: api/v1/shields
+    /// <summary>
+    /// Get a List of All Shields.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetCategoriesAsync()
     {
@@ -39,6 +43,10 @@ public class ShieldController : ControllerBase
         return Ok(result);
     }
     
+    /// GET: api/v1/shields/{id}
+    /// <summary>
+    /// Get a List of Shields by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDesignByIdAsync(int id)
     {

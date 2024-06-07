@@ -20,7 +20,10 @@ public class ColorController : ControllerBase
         _colorRepository = colorRepository;
         _mapper = mapper;
     }
-    
+    /// GET: api/v1/colors
+    /// <summary>
+    /// Get a List of All Colors.
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetCategoriesAsync()
     {
@@ -38,7 +41,10 @@ public class ColorController : ControllerBase
         
         return Ok(result);
     }
-    
+    /// GET: api/v1/colors/{id}
+    /// <summary>
+    /// Get a List of Colors by Id.
+    /// </summary>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetDesignByIdAsync(int id)
     {
