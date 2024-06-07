@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "FitShirt Api",
-        Description = "An ASP.NET Core Web API for managing ToDo items",
+        Description = "FitShirt API working",
         TermsOfService = new Uri("https://example.com/terms"),
         Contact = new OpenApiContact
         {

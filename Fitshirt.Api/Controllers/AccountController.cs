@@ -26,6 +26,24 @@ public class AccountController : ControllerBase
     /// <summary>
     /// Create an Account.
     /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/v1/account/register
+    ///     {
+    ///        "name": "Diego",
+    ///        "lastname": "Defilippi",
+    ///        "birthdate": "2002-10-02",
+    ///        "username": "Diegos",
+    ///        "password": "123456789",
+    ///        "confirmPassword": "123456789",
+    ///        "email": "ddefsan@test.com",
+    ///        "cellphone": "999999999"
+    ///     }
+    /// 
+    ///    True
+    /// 
+    /// </remarks>
     [HttpPost]
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
@@ -45,7 +63,18 @@ public class AccountController : ControllerBase
     /// <summary>
     /// Log in to an Account.
     /// </summary>
+    /// <remarks>
+    /// Sample request:
     ///
+    ///     POST /api/v1/account/login
+    ///     {
+    ///        "username": "Diegos",
+    ///        "password": "123456789"
+    ///     }
+    /// 
+    ///     True
+    ///
+    /// </remarks>
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequest request)

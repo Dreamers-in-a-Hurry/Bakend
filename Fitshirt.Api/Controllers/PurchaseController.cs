@@ -93,6 +93,17 @@ public class PurchaseController : ControllerBase
     /// <summary>
     /// Buy a Shirt.
     /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /Todo
+    ///     {
+    ///        "id": 1,
+    ///        "name": "Item #1",
+    ///        "isComplete": true
+    ///     }
+    ///
+    /// </remarks>
     [HttpPost]
     public async Task<IActionResult> PostPurchaseAsync([FromBody] PurchaseRequest request)
     {

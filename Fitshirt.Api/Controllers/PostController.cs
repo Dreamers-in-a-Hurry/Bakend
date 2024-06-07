@@ -124,6 +124,24 @@ public class PostController : ControllerBase
     /// <summary>
     /// Create a Post
     /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/v1/posts
+    ///     {
+    ///        "name": "Daniel",
+    ///        "image": "Upload an Image with an extension png",
+    ///        "stock": 90,
+    ///        "price": 100,
+    ///        "categoryId": 2,
+    ///        "colorId": 6,
+    ///        "userId": 2147483647,
+    ///        "sizeIds": [
+    ///              1
+    ///         ]
+    ///     }
+    ///
+    /// </remarks>
     [HttpPost]
     public async Task<IActionResult> PostPostAsync([FromBody] PostRequest request)
     {

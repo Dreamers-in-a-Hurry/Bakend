@@ -94,6 +94,22 @@ public class DesignController: ControllerBase
     /// <summary>
     /// Create a Design
     /// </summary>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST /api/v1/designs
+    ///     {
+    ///        "name": "RopaPersonalizada",
+    ///        "primaryColorId": 1,
+    ///        "secondaryColorId": 2,
+    ///        "tertiaryColorId": 3,
+    ///        "userId": 1,
+    ///        "shieldId": 6
+    ///     }
+    ///
+    ///     True
+    ///
+    /// </remarks>
     [HttpPost]
     public async Task<IActionResult> PostDesignAsync([FromBody] DesignRequest request)
     {
