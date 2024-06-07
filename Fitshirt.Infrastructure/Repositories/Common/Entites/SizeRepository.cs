@@ -13,9 +13,9 @@ public class SizeRepository : ISizeRepository
         _context = context;
     }
 
-    public Task<IReadOnlyList<Size>> GetAllAsync()
+    public async Task<IReadOnlyList<Size>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Sizes.Where(size => size.IsEnable).ToListAsync();
     }
 
     public async Task<Size?> GetByIdAsync(int id)
