@@ -1,6 +1,6 @@
 namespace Fitshirt.Api.Tests.Controllers;
 
-public class PostControllerTests
+public class UserControllerUnitTest
 {
     
 }
