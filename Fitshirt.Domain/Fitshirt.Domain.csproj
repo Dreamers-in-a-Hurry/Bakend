@@ -6,4 +6,22 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Fitshirt.Infrastructure\Fitshirt.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Features\Users\**" />
+      <Compile Include="Features\Users\IUserDomain.cs" />
+      <Compile Include="Features\Users\UserDomain.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Features\Users\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Features\Users\**" />
+    </ItemGroup>
+
 </Project>
